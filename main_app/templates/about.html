@@ -1,0 +1,41 @@
+{% extends 'base.html' %} 
+
+{% block title %}About{% endblock %} 
+
+{% block content %}
+<div class="top-section">
+  <h1 class="about-page-title">DailyDone</h1>
+  <p>
+    DailyDone is a streamlined project management tool crafted for efficiency and superb user-experience. Enabling users to <strong style="color: #FA0644;">easily create, track, update, and complete tasks and projects</strong>, it injects simplicity into every step of project management. The platform fosters productivity and team collaboration by providing features for task assignments, timeline creation, and real-time notifications. Whether managing personal tasks or coordinating team-based projects, DailyDone offers a comprehensive solution to visualize and monitor progress seamlessly. With its user-friendly interface and a wealth of features, it's an optimal choice for anyone seeking a superior solution for project management and task tracking. With DailyDone, we aim to turn every day into a day of accomplishment.
+  </p>
+</div>
+
+<div class="key-features-section">
+  <h2 class="key-features-title">Key Features:</h2>
+  <ul>
+    <li>User Authentication: Register, Login, and Logout</li>
+    <li>Project Management: Create, View, Edit, and Delete projects</li>
+    <li>Task Management: Add, View, Update, and Delete tasks within projects</li>
+    <li>Collaboration: Assign tasks to specific collaborators and invite users to join projects</li>
+    <li>Notifications: Receive alerts for due tasks, project invitations, and task assignments</li>
+  </ul>
+</div>
+
+{% comment %} <div class="learn-more-section">
+    <a href="/signup" class="learn-more-button">Learn More</a>
+</div> {% endcomment %}
+
+<div class="developer-section">
+    <div class="left-side-image">
+        <img
+          class="image is-128x128"
+          src="/static/main_app/images/Dolores_crazover.png"
+          alt="Dolores Crazover"
+        />
+      </div>
+  <h2 class="developer-title">About the Developer</h2>
+  <p>
+    In the spirit of transparency and continuous learning, Dolores openly shares her work and development journey on her <a href="https://github.com/DoloresCode" target="_blank" style="color: #FA0644; font-weight: bold;">GitHub</a> page. She welcomes you to connect with her on <a href="https://www.linkedin.com/in/dolores-crazover/" target="_blank" style="color: #FA0644; font-weight: bold;">LinkedIn</a> to know more about her professional endeavors. For software development opportunities, questions, or if you would like to discuss potential collaborations, please don't hesitate to reach out to Dolores via email at <a href="mailto:dcrazover@gmail.com" style="color: #FA0644; font-weight: bold;">dcrazover@gmail.com</a>. She looks forward to helping individuals and teams accomplish more every day with DailyDone.
+  </p>
+</div>
+{% endblock %}

@@ -1,0 +1,87 @@
+
+h1,
+h2,
+h3 {
+    color: Black;
+}
+
+.title {
+    color: Black;
+}
+
+
+
+p {
+    font-size: 12px;
+}
+
+/* Base css */
+
+body {
+    font-family: Aileron, sans-serif;
+    background-color: white;
+    color: black;
+    min-height: 100vh;
+}
+
+/* Footer in base.html */
+
+.footer {
+    background-color: black;
+    color: #ffffff;
+    text-align: center;
+    padding: 20px;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    font-size: 14px;
+    margin-top: 4rem;
+    
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: #e8e3de;
+}
+
+.container {
+    padding-bottom: 60px;
+}
+
+/* Homepage */
+
+.home-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 2rem;
+}
+
+
+.home-title {
+    font-size: 35px;
+    font-weight: bold;
+    
+}
+
+.signup-button {
+    background-color: #FA0644;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.signup-button:hover {
+    background-color: #C7052C;
+}
+
+.image-homepage {
+    width: 3500px; 
+}
