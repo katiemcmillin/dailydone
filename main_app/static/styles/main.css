@@ -90,41 +90,46 @@ body {
 
 .project-list {
     margin: 20px;
-  }
-  
-  .title {
+}
+
+.title {
     color: #FA0644;
-  }
-  
-  .project-grid {
+}
+
+.project-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 20px;
-  }
-  
-  .project-item {
+}
+
+.project-item {
     background-color: #E2E2E2;
     border-radius: 5px;
     padding: 10px;
     text-decoration: none;
     color: #000000;
-  }
-  
-  .project-title {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    transition: box-shadow 0.3s ease; 
+}
+
+.project-item:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+}
+
+.project-title {
     font-size: 18px;
     font-weight: bold;
     margin-bottom: 10px;
-  }
-  
-  .project-info {
+}
+
+.project-info {
     margin-bottom: 10px;
-  }
-  
-  .project-importance {
+}
+
+.project-importance {
     color: #38B6FF;
-  }
-  
-  .project-dates {
+}
+
+.project-dates {
     color: #000000;
-  }
-  
+}
