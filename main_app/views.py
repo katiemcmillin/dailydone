@@ -6,8 +6,8 @@ from django.views.generic.base import TemplateView
 class Home(TemplateView):
     template_name = "home.html"
 
-class Login(TemplateView):
-    template_name = "login.html"
+# class Login(TemplateView):
+#     template_name = "login.html"
 
-class Signup(TemplateView):
-    template_name = "signup.html"
+# class Signup(TemplateView):
+#     template_name = "signup.html"
