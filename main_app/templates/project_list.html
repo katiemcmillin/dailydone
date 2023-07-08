@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Projects List{% endblock %}
+
+{% block content %}
+  <div class="project-list">
+    <h1 class="title">Projects</h1>
+    {% if projects %}
+      <div class="project-grid">
+        {% for project in projects %}
+          <a href="" class="project-item">
+            <h2 class="project-title">{{ project.title }}</h2>
+            <div class="project-info">
+                <p class="project-importance">Importance: {{ project.importance }}</p>
+                <p class="project-dates">
+                  Start Date: {{ project.start_date }} |
+                  Due Date: {{ project.end_date }}
+              </p>
+            </div>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <p>No projects found.</p>
+    {% endif %}
+  </div>
+{% endblock %}

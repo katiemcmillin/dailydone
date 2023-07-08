@@ -85,3 +85,46 @@ body {
 .image-homepage {
     width: 3500px; 
 }
+
+/* Projects List Page */
+
+.project-list {
+    margin: 20px;
+  }
+  
+  .title {
+    color: #FA0644;
+  }
+  
+  .project-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  
+  .project-item {
+    background-color: #E2E2E2;
+    border-radius: 5px;
+    padding: 10px;
+    text-decoration: none;
+    color: #000000;
+  }
+  
+  .project-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .project-info {
+    margin-bottom: 10px;
+  }
+  
+  .project-importance {
+    color: #38B6FF;
+  }
+  
+  .project-dates {
+    color: #000000;
+  }
+  
