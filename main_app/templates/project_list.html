@@ -11,11 +11,14 @@
           <a href="" class="project-item">
             <h2 class="project-title">{{ project.title }}</h2>
             <div class="project-info">
-                <p class="project-importance">Importance: {{ project.importance }}</p>
+                <p class="project-importance"><strong>Importance:</strong> {{ project.importance }}</p>
                 <p class="project-dates">
-                  Start Date: {{ project.start_date }} |
-                  Due Date: {{ project.end_date }}
+                    <strong>Start Date:</strong> {{ project.start_date }} |
+                  <strong>Due Date:</strong> {{ project.end_date }}
               </p>
+              <p class="project-status">
+                <strong>Status:</strong> {{ project.get_status_display }} 
+            </p>
             </div>
           </a>
         {% endfor %}
