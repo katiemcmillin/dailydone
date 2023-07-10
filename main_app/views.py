@@ -97,6 +97,8 @@ class ProjectList(TemplateView):
         if title != None:
             # .filter is the sql WHERE statement and title__icontains is doing a search for any title that contains the query param
             context["projects"] = Project.objects.filter(title__icontains=title)
+            # We add a header context that includes the search param
+            context["header"] = f"Searching for {title}"
         else:
             context["projects"] = Project.objects.all()
         return context
