@@ -91,7 +91,14 @@ class ProjectList(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["projects"] = Project.objects.all()
+        # to get the query parameter we have to acccess it in the request.GET dictionary object        
+        title = self.request.GET.get("title")
+        # If a query exists we will filter by title 
+        if title != None:
+            # .filter is the sql WHERE statement and title__icontains is doing a search for any title that contains the query param
+            context["projects"] = Project.objects.filter(title__icontains=title)
+        else:
+            context["projects"] = Project.objects.all()
         return context
     
 

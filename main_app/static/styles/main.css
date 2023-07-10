@@ -133,3 +133,8 @@ body {
 .project-dates {
     color: #000000;
 }
+
+.custom-button-search {
+    background-color: #FA0644;
+    color:#ffffff;
+}
