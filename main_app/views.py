@@ -1,8 +1,9 @@
+from django.urls import reverse
 from django.shortcuts import render
 from django.views import View 
 from .models import Project 
 from django.http import HttpResponse 
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 
@@ -92,8 +93,10 @@ class ProjectCreate(CreateView):
     model = Project
     fields = ['title', 'description', 'start_date', 'end_date', 'importance', 'status']
     template_name = "project_create.html"
-    success_url = "/projects/"
 
+    # this will get the pk from the route and redirect to project view
+    def get_success_url(self):
+        return reverse('project_detail', kwargs={'pk': self.object.pk})
 
 class ProjectList(TemplateView):
     template_name = "project_list.html"
@@ -130,4 +133,12 @@ class ProjectUpdate(UpdateView):
     model = Project
     fields = ['title', 'description', 'start_date', 'end_date', 'importance', 'status']
     template_name = "project_update.html"
+
+    def get_success_url(self):
+        return reverse('project_detail', kwargs={'pk': self.object.pk})
+    
+class ProjectDelete(DeleteView):
+    model = Project
+    template_name = "project_delete_confirmation.html"
     success_url = "/projects/"
+

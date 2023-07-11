@@ -278,7 +278,9 @@ body {
 
 .title {
     color: #FA0644;
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 1rem;
 }
 
 .description {
@@ -336,9 +338,11 @@ body {
     margin: 20px;
 }
 
-.title {
+.title-update-project {
     color: #38B6FF;
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 1rem;
 }
 
 .update-form {
@@ -398,7 +402,58 @@ body {
     text-decoration: underline;
 }
 
+/* Project Delete Page */
 
+.picture-delete-p { 
+    height: 400px; 
+    overflow: hidden; 
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.image-delete-p {
+    width: 100%; 
+    height: auto; 
+}
+
+.delete-page-title {
+    text-align: center;
+    margin-bottom: 2rem;
+    font-size: 25px;
+}
+
+.buttons-delete-pg {
+    text-align: center;
+    
+}
+
+.button.is-primary.custom-cancel-button {
+    background-color: #AA02FF;
+}
+
+@media (max-width: 768px) {
+    /* Project Delete Page - When Small Screen */
+
+.picture-delete-p {
+    height: 200px;
+}
+
+.delete-page-title {
+    font-size: 20px;
+}
+
+.buttons-delete-pg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: -4rem;
+}
+
+.button.is-primary.custom-cancel-button {
+    background-color: #AA02FF;
+    margin-top: 1rem;
+}
+}
 
 
 

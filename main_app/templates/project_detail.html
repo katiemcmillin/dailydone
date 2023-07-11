@@ -3,56 +3,55 @@
 {% block title %}Project Detail{% endblock %}
 
 {% block content %}
-  <div class="project-detail">
+<div class="project-detail">
     <div class="go-back-link-detail-pg">
-      <a href="{% url 'project_list' %}" class="button is-dark">Go Back</a>
+        <a href="{% url 'project_list' %}" class="button is-dark">Go Back</a>
     </div>
 
     <div class="project-header">
-      <h1 class="title">{{ project.title }}</h1>
-      <p class="description">{{ project.description }}</p>
+        <h1 class="title">{{ project.title }}</h1>
+        <p class="description">{{ project.description }}</p>
     </div>
 
     <div class="project-info">
-      <div class="project-dates">
-        <p><strong>Start Date:</strong> {{ project.start_date }}</p>
-        <p><strong>End Date:</strong> {{ project.end_date }}</p>
-      </div>
-      <div class="project-status">
-        <p><strong>Importance:</strong> {{ project.get_importance_display|title }}</p>
-        <p><strong>Status:</strong> {{ project.get_status_display|title }}</p>
-      </div>
+        <div class="project-dates">
+            <p><strong>Start Date:</strong> {{ project.start_date }}</p>
+            <p><strong>End Date:</strong> {{ project.end_date }}</p>
+        </div>
+        <div class="project-status">
+            <p><strong>Importance:</strong> {{ project.get_importance_display|title }}</p>
+            <p><strong>Status:</strong> {{ project.get_status_display|title }}</p>
+        </div>
     </div>
 
     <div class="task-section">
-      <h2 class="tasks-title">Tasks:</h2>
-      {% if project.tasks.exists %}
+        <h2 class="tasks-title">Tasks:</h2>
+        {% if project.tasks.exists %}
         <ul class="task-list">
-          {% for task in project.tasks.all %}
+        {% for task in project.tasks.all %}
             <li class="task-item">
-              <input type="checkbox" {% if task.completed %}checked{% endif %} disabled>
-              <span>{{ task.title }}</span>
+                <input type="checkbox" {% if task.completed %}checked{% endif %} disabled>
+                <span>{{ task.title }}</span>
             </li>
-          {% endfor %}
+        {% endfor %}
         </ul>
-      {% else %}
+        {% else %}
         <p>No tasks found for this project.</p>
-      {% endif %}
+        {% endif %}
     </div>
+</div>
 
-    <div class="detail__container">
-        <div class="buttons-upt-dlt">
-        <!-- update and delete buttons -->
-        <a href="{% url 'project_update' project.pk %}" class="button is-info"> 
-            <span class="icon">
-                <i class="fas fa-edit"></i>
-            </span>
-        </a>
-        <a href="" class="button is-danger">
-            <span class="icon">
-                <i class="fas fa-trash-alt"></i>
-            </span>
-        </a>
-    </div>
-  </div>
+<div class="buttons-upt-dlt">
+    <!-- update and delete buttons -->
+    <a href="{% url 'project_update' project.pk %}" class="button is-info"> 
+        <span class="icon">
+            <i class="fas fa-edit"></i>
+        </span>
+    </a>
+    <a href="{% url 'project_delete' project.pk %}" class="button is-danger">
+        <span class="icon">
+            <i class="fas fa-trash-alt"></i>
+        </span>
+    </a>
+</div>
 {% endblock %}

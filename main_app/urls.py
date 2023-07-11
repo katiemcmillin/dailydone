@@ -9,4 +9,5 @@ urlpatterns = [
     path('projects/new/', views.ProjectCreate.as_view(), name="project_create"),
     path('projects/<int:pk>/', views.ProjectDetail.as_view(), name='project_detail'),
     path('projects/<int:pk>/update', views.ProjectUpdate.as_view(), name="project_update"),
+    path('projects/<int:pk>/delete',views.ProjectDelete.as_view(), name="project_delete"),
 ]
