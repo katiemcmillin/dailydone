@@ -16,11 +16,11 @@ class About(TemplateView):
     template_name = "about.html"
 
 # class Project :
-#     def __init__(self, title, description, start_date, end_date, importance, status, created_at, updated_at):
+#     def __init__(self, title, description, start_date, due_date, importance, status, created_at, updated_at):
 #         self.title = title
 #         self.idescription = description
 #         self.start_date = start_date
-#         self.end_date = end_date
+#         self.due_date = due_date
 #         self.importance = importance
 #         self.status = status
 #         self.created_at = created_at
@@ -91,7 +91,7 @@ class About(TemplateView):
 
 class ProjectCreate(CreateView):
     model = Project
-    fields = ['title', 'description', 'start_date', 'end_date', 'importance', 'status']
+    fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status']
     template_name = "project_create.html"
 
     # this will get the pk from the route and redirect to project view
@@ -131,7 +131,7 @@ class ProjectDetail(DetailView):
 
 class ProjectUpdate(UpdateView):
     model = Project
-    fields = ['title', 'description', 'start_date', 'end_date', 'importance', 'status']
+    fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status']
     template_name = "project_update.html"
 
     def get_success_url(self):
