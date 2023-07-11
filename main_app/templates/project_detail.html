@@ -16,7 +16,7 @@
     <div class="project-info">
         <div class="project-dates">
             <p><strong>Start Date:</strong> {{ project.start_date }}</p>
-            <p><strong>End Date:</strong> {{ project.end_date }}</p>
+            <p><strong>End Date:</strong> {{ project.due_date }}</p>
         </div>
         <div class="project-status">
             <p><strong>Importance:</strong> {{ project.get_importance_display|title }}</p>
@@ -25,19 +25,41 @@
     </div>
 
     <div class="task-section">
-        <h2 class="tasks-title">Tasks:</h2>
-        {% if project.tasks.exists %}
-        <ul class="task-list">
-        {% for task in project.tasks.all %}
-            <li class="task-item">
-                <input type="checkbox" {% if task.completed %}checked{% endif %} disabled>
-                <span>{{ task.title }}</span>
-            </li>
-        {% endfor %}
-        </ul>
-        {% else %}
-        <p>No tasks found for this project.</p>
-        {% endif %}
+        <div class="task-section">
+                <h2 class="tasks-title">Tasks:</h2>
+                {% if project.tasks.exists %}
+                <ul class="task-list" style="list-style-type: none;">
+                    {% for task in project.tasks.all %}
+                    {% if not task.is_completed %}
+                    <li class="task-item">
+                        <input type="checkbox" {% if task.is_completed %}checked{% endif %}>
+                        <div class="task-details">
+                            <span class="task-title">{{ task.title }}</span>
+                            <span class="task-importance">- <strong>{{ task.get_importance_display|title }}</strong></span>
+                        </div>
+                    </li>
+                    {% endif %}
+                    {% endfor %}
+                </ul>
+                {% if project.completed_tasks.exists %}
+                    <h2 class="tasks-title">Completed Tasks:</h2>
+                    <ul class="task-list" style="list-style-type: none;">
+                        {% for task in project.completed_tasks.all %}
+                            <li class="task-item">
+                                <span>{{ task.title }}</span>
+                                <span>- {{ task.get_importance_display|title }}</span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            {% else %}
+                <article class="message">
+                    <div class="message-header">
+                        <p>No tasks found for this project.</p>
+                    </div>
+                </article>
+            {% endif %}
+        </div>
     </div>
 </div>
 

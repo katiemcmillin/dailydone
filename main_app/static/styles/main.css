@@ -329,6 +329,74 @@ body {
 
 .buttons-upt-dlt {
     margin-top: 1.5rem;
+    margin-left: 2rem;
+}
+
+
+.task-section {
+    margin-top: 20px;
+}
+
+.tasks-title {
+    color: #FA0644;
+    font-size: 20px;
+}
+
+.task-list {
+    padding: 0;
+}
+
+.task-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.task-item input[type="checkbox"] {
+    margin-right: 10px;
+}
+
+.task-item span {
+    color: #000000;
+    font-size: 14px;
+}
+
+.buttons-upt-dlt {
+    margin-top: 1.5rem;
+}
+
+/* Detail Page - Forr Small Screen */
+@media (max-width: 768px) {
+.project-detail {
+    margin: 10px;
+}
+
+.title {
+    font-size: 24px;
+
+}
+
+.description {
+    font-size: 14px;
+}
+
+.tasks-title {
+    font-size: 18px;
+}
+
+.task-item {
+    font-size: 12px;
+}
+
+.go-back-link-detail-pg {
+
+    margin-bottom: 1rem;
+}
+
+.buttons-upt-dlt {
+    margin-top: 1rem;
+    margin-left: 1rem;
+}
 }
 
 /* Project Update Page */
