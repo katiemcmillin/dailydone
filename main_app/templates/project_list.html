@@ -22,6 +22,10 @@
           </form>
     </div>
 
+    <div class="add-project-btn">
+        <a class="button is-dark" href="{% url 'project_create' %}">Add Project</a>
+    </div>
+    
     {% if projects %}
       <div class="project-grid">
         {% for project in projects %}

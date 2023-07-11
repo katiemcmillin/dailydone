@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views import View 
 from .models import Project 
 from django.http import HttpResponse 
+from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
 
 from django.views.generic import DetailView
@@ -86,6 +87,14 @@ class About(TemplateView):
 # ),
 # ]
 
+class ProjectCreate(CreateView):
+    model = Project
+    fields = ['title', 'description', 'start_date', 'end_date', 'importance', 'status']
+    template_name = "project_create.html"
+    success_url = "/projects/"
+
+
+
 class ProjectList(TemplateView):
     template_name = "project_list.html"
 
@@ -101,6 +110,8 @@ class ProjectList(TemplateView):
             context["header"] = f"Searching for {title}"
         else:
             context["projects"] = Project.objects.all()
+            # default header for not searching 
+            context["header"] = "List Of Projects"
         return context
     
 
