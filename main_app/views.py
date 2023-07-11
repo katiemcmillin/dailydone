@@ -1,7 +1,7 @@
 from django.urls import reverse
-from django.shortcuts import render
+from django.shortcuts import redirect
 from django.views import View 
-from .models import Project 
+from .models import Project, Task 
 from django.http import HttpResponse 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
@@ -142,3 +142,27 @@ class ProjectDelete(DeleteView):
     template_name = "project_delete_confirmation.html"
     success_url = "/projects/"
 
+class TaskCreate(View):
+
+    def post(self, request, pk):
+        title = request.POST.get("title")
+        description = request.POST.get("description")
+        is_completed = request.POST.get("is_completed")
+        importance = request.POST.get("importance")
+        completion_date = request.POST.get("completion_date")
+        due_date = request.POST.get("due_date")
+        created_at = request.POST.get("create_at")
+
+        project = Project.objects.get(pk=pk)
+        Task.objects.create(
+            title=title,
+            description=description,
+            is_completed=is_completed,
+            importance=importance,
+            completion_date=completion_date,
+            due_date=due_date,
+            created_at=created_at,
+            project=project
+        )
+        return redirect('project_detail', pk=pk)
+    

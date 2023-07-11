@@ -42,10 +42,11 @@ class Task(models.Model):
     ]
 
     title = models.CharField(max_length=3000)
-    description = models.TextField(max_length=4000)
+    description = models.TextField(max_length=4000, null=True)
     is_completed = models.BooleanField(default=False)
     importance = models.CharField(max_length=100, choices=IMPORTANCE_CHOICES)
     completion_date = models.DateField(null=True, blank=True)
+    due_date = models.DateField(null=True, blank=True) 
     created_at = models.DateTimeField(auto_now_add=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="tasks")
 

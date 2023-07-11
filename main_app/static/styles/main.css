@@ -103,17 +103,20 @@ body {
 }
 
 .project-item {
-    background-color: #E2E2E2;
+    background-color: white;
     border-radius: 5px;
     padding: 10px;
     text-decoration: none;
     color: #000000;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4); 
+    border-color: #000000;
     transition: box-shadow 0.3s ease; 
 }
 
 .project-item:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    transform: scale(1.1);
+    z-index: 10; 
 }
 
 .project-title {
@@ -310,17 +313,21 @@ body {
 .tasks-title {
     color: #FA0644;
     font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 1rem;
 }
 
 .task-list {
     list-style-type: disc;
     padding-left: 20px;
+    margin-top: 1rem;
 }
 
 .task-item {
     color: #000000;
     font-size: 14px;
     margin-bottom: 5px;
+    
 }
 
 .go-back-link-detail-pg {
@@ -332,38 +339,54 @@ body {
     margin-left: 2rem;
 }
 
-
-.task-section {
-    margin-top: 20px;
+.task-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
 }
 
-.tasks-title {
-    color: #FA0644;
-    font-size: 20px;
+.task-table th,
+.task-table td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
 }
 
-.task-list {
-    padding: 0;
+.task-table th:first-child,
+.task-table td:first-child {
+    padding-left: 0;
 }
 
-.task-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
+.task-table th:last-child,
+.task-table td:last-child {
+    padding-right: 0;
 }
 
-.task-item input[type="checkbox"] {
-    margin-right: 10px;
+.task-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
 }
 
-.task-item span {
-    color: #000000;
-    font-size: 14px;
+.task-table tbody tr:hover {
+    background-color: hsla(0, 0%, 100%, 0.1);
+    cursor: pointer;
 }
 
 .buttons-upt-dlt {
     margin-top: 1.5rem;
 }
+
+.task-title,
+.task-importance,
+.task-due_date {
+    font-size: 14px;
+}
+
+.add_task {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 
 /* Detail Page - Forr Small Screen */
 @media (max-width: 768px) {
@@ -382,6 +405,7 @@ body {
 
 .tasks-title {
     font-size: 18px;
+    margin-bottom: 1rem;
 }
 
 .task-item {
@@ -389,7 +413,6 @@ body {
 }
 
 .go-back-link-detail-pg {
-
     margin-bottom: 1rem;
 }
 
@@ -397,7 +420,11 @@ body {
     margin-top: 1rem;
     margin-left: 1rem;
 }
+.task-title, .task-importance, .task-due_date {
+    font-size: 12px;
 }
+}
+
 
 /* Project Update Page */
 
