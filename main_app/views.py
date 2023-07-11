@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.views import View 
 from .models import Project 
 from django.http import HttpResponse 
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView
 
@@ -125,3 +125,9 @@ class ProjectDetail(DetailView):
     #     # Retrieve the project object based on the project_id
     #     # Add the project object to the context
     #     return context
+
+class ProjectUpdate(UpdateView):
+    model = Project
+    fields = ['title', 'description', 'start_date', 'end_date', 'importance', 'status']
+    template_name = "project_update.html"
+    success_url = "/projects/"

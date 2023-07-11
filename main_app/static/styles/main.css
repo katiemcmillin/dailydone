@@ -189,6 +189,7 @@ body {
     color: #FA5300;
     text-decoration: none;
     font-size: 16px;
+    font-weight: bold;
 }
 
 .link-go-back-new a:hover {
@@ -324,10 +325,78 @@ body {
     margin-bottom: 2rem;
 }
 
+.buttons-upt-dlt {
+    margin-top: 1.5rem;
+}
+
+/* Project Update Page */
 
 
+.update-page-container {
+    margin: 20px;
+}
 
+.title {
+    color: #38B6FF;
+    font-size: 24px;
+}
 
+.update-form {
+    margin-top: 20px;
+}
+
+.update-form label {
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 0.5rem;
+}
+
+.update-form input[type="text"],
+.update-form textarea {
+    padding: 0.5rem;
+    border: 1px solid #E2E2E2;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.update-form input[type="text"]:focus,
+.update-form textarea:focus {
+    outline: none;
+    border-color: #38B6FF;
+    box-shadow: 0px 0px 4px #38B6FF;
+}
+
+.update-form input[type="submit"] {
+    background-color: #38B6FF;
+    color: #FFFFFF;
+    padding: 0.5rem;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    width: 150px;   
+    margin: 1.5rem auto; 
+}
+
+.update-form input[type="submit"]:hover {
+    background-color: #BF2026;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.go-back-container-update {
+    margin-top: 1.5rem;
+}
+
+.link-go-back-update a {
+    color: #FA0644;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.link-go-back-update a:hover {
+    color: #FA0644;
+    text-decoration: underline;
+}
 
 
 

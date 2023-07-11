@@ -1,0 +1,20 @@
+{% extends 'base.html' %} 
+
+{% block title %}Update Project{% endblock %} 
+
+{% block content %}
+<h1 class="title pt-5">Update {{project.title}}</h1>
+
+<div class="link-go-back-update">
+    <a href="{% url 'project_list' %}">> Go back</a>
+</div>  
+
+<div class="form-container">
+
+    <form class="update-form" action="" method="post">
+    {% csrf_token %} {{form.as_p}}
+    <input type="submit" value="Submit" />
+    </form>
+</div>
+
+{% endblock %}
