@@ -124,6 +124,8 @@ body {
 
 .project-info {
     margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
 }
 
 .project-importance {
@@ -132,6 +134,13 @@ body {
 
 .project-dates {
     color: #000000;
+}
+
+.project-importance,
+.project-dates,
+.project-status {
+    margin-bottom: 0.5rem;
+    font-size: 14px;
 }
 
 .custom-button-search {
@@ -256,10 +265,64 @@ body {
     margin-bottom: 1rem;
 }
 
+/* Project Detail Page */
 
+.project-detail {
+    margin: 20px;
+}
 
+.project-header {
+    margin-bottom: 10px;
+}
 
+.title {
+    color: #FA0644;
+    font-size: 24px;
+}
 
+.description {
+    color: #000000;
+    font-size: 16px;
+}
+
+.project-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.project-dates p,
+.project-status p {
+    margin-bottom: 5px;
+}
+
+.project-dates strong,
+.project-status strong {
+    font-weight: bold;
+}
+
+.task-section {
+    margin-top: 20px;
+}
+
+.tasks-title {
+    color: #FA0644;
+    font-size: 20px;
+}
+
+.task-list {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.task-item {
+    color: #000000;
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.go-back-link-detail-pg {
+    margin-bottom: 2rem;
+}
 
 
 

@@ -4,6 +4,7 @@ from .models import Project
 from django.http import HttpResponse 
 from django.views.generic.edit import CreateView
 from django.views.generic.base import TemplateView
+from django.views.generic import DetailView
 
 from django.views.generic import DetailView
 
@@ -94,7 +95,6 @@ class ProjectCreate(CreateView):
     success_url = "/projects/"
 
 
-
 class ProjectList(TemplateView):
     template_name = "project_list.html"
 
@@ -115,14 +115,13 @@ class ProjectList(TemplateView):
         return context
     
 
-    
 class ProjectDetail(DetailView):
     model = Project
     template_name = "project_detail.html"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        project_id = kwargs['project_id']
-        # Retrieve the project object based on the project_id
-        # Add the project object to the context
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     project_id = kwargs['project_id']
+    #     # Retrieve the project object based on the project_id
+    #     # Add the project object to the context
+    #     return context

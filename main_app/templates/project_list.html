@@ -25,21 +25,26 @@
     <div class="add-project-btn">
         <a class="button is-dark" href="{% url 'project_create' %}">Add Project</a>
     </div>
-    
+
     {% if projects %}
       <div class="project-grid">
         {% for project in projects %}
-          <a href="" class="project-item">
+          <a href="{% url 'project_detail' project.pk %}" class="project-item">
             <h2 class="project-title">{{ project.title }}</h2>
+            <hr>
             <div class="project-info">
-                <p class="project-importance"><strong>Importance:</strong> {{ project.importance }}</p>
-                <p class="project-dates">
-                    <strong>Start Date:</strong> {{ project.start_date }} |
-                  <strong>Due Date:</strong> {{ project.end_date }}
-              </p>
-              <p class="project-status">
-                <strong>Status:</strong> {{ project.get_status_display }} 
-            </p>
+                <div class="project-importance">
+                    <strong>Importance:</strong> {{ project.get_importance_display|title }}
+                </div>
+                <div class="project-dates">
+                    <strong>Start Date:</strong> {{ project.start_date }}
+                </div>
+                <div class="project-dates">
+                    <strong>Due Date:</strong> {{ project.end_date }}
+                </div>
+                <div class="project-status">
+                    <strong>Status:</strong> {{ project.get_status_display }}
+                </div>
             </div>
           </a>
         {% endfor %}
