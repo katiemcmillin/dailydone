@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block title %}Completed Tasks{% endblock %} 
+
+{% block content %}
+    <h1 class="title_tasks-l">Completed Tasks</h1>
+
+    <table class="completed-tasks-table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Importance</th>
+            <th>Due Date</th>
+            <th>Completion Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for task in completed_tasks %}
+        <tr>
+            <td>{{ task.title }}</td>
+            <td>{{ task.importance }}</td>
+            <td>{{ task.due_date }}</td>
+            <td>Completed</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+
+{% endblock %}

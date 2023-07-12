@@ -122,12 +122,17 @@ class ProjectDetail(DetailView):
     model = Project
     template_name = "project_detail.html"
 
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     project_id = kwargs['project_id']
-    #     # Retrieve the project object based on the project_id
-    #     # Add the project object to the context
-    #     return context
+    def post(self, request, *args, **kwargs):
+        project = self.get_object()
+        task_ids = request.POST.getlist('task_ids[]')  
+        completed_tasks = Task.objects.filter(pk__in=task_ids)
+        
+        for task in completed_tasks:
+            task.is_completed = True
+            task.save()
+            TaskComplete.objects.create(task=task)
+        
+        return redirect('project_detail', pk=project.pk)
 
 class ProjectUpdate(UpdateView):
     model = Project
@@ -173,21 +178,50 @@ class TaskList(ListView):
     context_object_name = 'tasks'
     ordering = 'due_date'
 
-    def task_list(request):
-        tasks = Task.objects.filter(is_completed=False)
-        completed_tasks = Task.objects.filter(is_completed=True)
-        context = {
-            'tasks': tasks,
-        '   completed_tasks': completed_tasks,
-        }
-        return redirect(request, 'task_list.html', context)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['completed_tasks'] = Task.objects.filter(is_completed=True)
+        return context
 
 
 class TaskComplete(TemplateView):
+    template_name = "task_complete.html"
+
     def post(self, request, pk):
         task = get_object_or_404(Task, pk=pk)
         TaskComplete.objects.create(task=task)
         return redirect('task_list')
+    
+    def task_complete(request):
+        completed_tasks = Task.objects.filter(is_completed=True)
+        context = {'completed_tasks': completed_tasks}
+
+        return render(request, 'task_complete.html', context)
 
 # 'get_object_or_404' provides a convenient way to handle the case where the task does not exist by automatically returning a 404 response see documentation for more details"
 # https://docs.djangoproject.com/en/4.2/topics/http/shortcuts/ 
+
+
+class TaskCreate(CreateView):
+    model = Task
+    fields = ['title', 'description', 'is_completed', 'importance','project', 'due_date']
+    template_name = 'task_create.html'
+    success_url = "/tasks/" 
+
+# access to all the projects to pick in the list
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data( **kwargs)
+        context['projects'] = Project.objects.all()
+        return context
+    
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        if form.is_valid():
+            task = form.save()  # save the new task instance
+            projects = request.POST.getlist('projects')  # I get the list of selected project ids
+            for project_id in projects:
+                project = Project.objects.get(pk=project_id)
+                task.projects.add(project)  # I add each selected project to the task
+            return redirect(self.success_url)
+        else:
+            return self.form_invalid(form)

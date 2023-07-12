@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Create New Task{% endblock %}
+
+{% block content %}
+
+<style> 
+    #task-create-page-container {
+        background-image: url("{% static 'main_app/images/create_task_image.jpeg' %}");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        background-size: cover;
+        min-height: 200vh; 
+        margin-bottom: -7rem;
+    }
+</style>
+
+
+<div id="task-create-page-container"> 
+    <h1 class="title_tasks-l2">Create New Task</h1>
+
+    <div class="link-go-back-new-task">
+        <a href="{% url 'task_list' %}">> Go back</a>
+    </div>
+
+    <form class="form-create-task" action="{% url 'task_create' %}" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+        <div class="field">
+            <label class="label">{{ field.label }}</label>
+            <div class="control">
+                {{ field }}
+            </div>
+        </div>
+        {% endfor %}
+        <div class="field is-grouped">
+            <div class="control">
+                <button class="button is-primary my-custom-button-t" type="submit">Create Task</button>
+            </div>
+            <div class="control">
+                <a class="button is-light" href="{% url 'project_list' %}">Cancel</a>
+            </div>
+        </div>
+        <span class="date-instruction-task-cr">Enter date in MM/DD/YYYY format for Due Date.</span>
+    </form>
+</div>
+    
+{% endblock %}
+
+
+{% comment %} Source: Accessing The URL of An Image Stored Inside The Static Folder
+https://forum.djangoproject.com/t/accessing-the-url-of-an-image-stored-inside-the-static-folder/14901 {% endcomment %}

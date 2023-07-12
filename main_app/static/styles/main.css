@@ -203,7 +203,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: 110vh;
     padding: 2rem;
     background-color: #FFFFFF;
     border-radius: 8px;
@@ -657,3 +657,106 @@ body {
     margin-bottom: 1rem;
     margin-top: 2rem;
 }
+
+.create-task-button {
+    background-color: #063854 !important;
+}
+
+.create-task-button:hover {
+    background-color: #FA0644 !important;
+}
+
+/* Task Create Page */
+
+.title_tasks-l2 {
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+    margin-left: 1.5rem;
+    color: #AA02FF
+    ;
+}
+
+.link-go-back-new-task {
+    margin-bottom: 1.5rem;
+    margin-left: 1.5rem;
+}
+
+.link-go-back-new-task a {
+    color: #AA02FF
+    ;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.link-go-back-new-task a:hover {
+    text-decoration: underline;
+}
+
+.form-create-task {
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center;
+    align-items: center; */
+    height: auto;
+    padding: 2rem;
+    background-color: #FFFFFF;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    margin: 0 auto;
+    max-width: 400px;
+}
+
+.form-create-task label {
+    font-size: 16px;
+    color: #000000;
+    margin-bottom: 0.5rem;
+}
+
+.form-create-task input[type="text"],
+.form-create-task textarea,
+.form-create-task select {
+    padding: 0.5rem;
+    border: 1px solid #E2E2E2;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.form-create-task input[type="text"]:focus,
+.form-create-task textarea:focus,
+.form-create-task select:focus {
+    outline: none;
+    border-color: #AA02FF;
+    box-shadow: 0px 0px 4px #AA02FF;
+}
+
+.my-custom-button-t {
+    background-color: #AA02FF
+    !important;  
+    color: #FFFFFF !important;  
+    padding: 0.5rem; 
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+    width: 150px;   
+}
+
+.my-custom-button-t:hover {
+    background-color: #063854 !important; 
+    color: #FFFFFF!important;  
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.date-instruction-task-cr {
+    font-size: 9px;
+    color: grey;
+    font-style: italic;
+    margin-top: 0.5rem;
+    margin-bottom: -1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+

@@ -4,25 +4,21 @@
 
 {% block content %}
 <div class="delete-page-container">
-  <div class="picture-delete-p">
-    <img class="image-delete-p" src="/static/main_app/images/image_delete_pcroject_page.jpeg"
-        alt="Abstract circle liquid motion flow explosion. Curved wave colorful pattern with paint drops on black background"
-      />
-  </div>
-  <h1 class="delete-page-title">
-    Are you sure you want to delete {{project.title}}?
-  </h1>
-  <form method="post">
-    {% csrf_token %}
-    <div class="buttons-delete-pg">
-      <!-- Confirm project delete -->
-      <input class="button is-danger custom-confirm-button" type="submit" value="Confirm" />
-      <!-- Redirect back to detail on cancel -->
-      <a
-        class="button is-primary custom-cancel-button"
-        href="{% url 'project_detail' project.pk %}"
-        >Cancel</a>
+    <div class="picture-delete-p">
+        <img class="image-delete-p" src="/static/main_app/images/image_delete_pcroject_page.jpeg"
+        alt="Abstract circle liquid motion flow explosion. Curved wave colorful pattern with paint drops on black background"/>
     </div>
-  </form>
+    <h1 class="delete-page-title">
+    Are you sure you want to delete {{project.title}}?
+    </h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="buttons-delete-pg">
+        <!-- Confirm project delete -->
+            <input class="button is-danger custom-confirm-button" type="submit" value="Confirm" />
+        <!-- Redirect back to detail on cancel -->
+            <a class="button is-primary custom-cancel-button" href="{% url 'project_detail' project.pk %}" >Cancel</a>
+        </div>
+    </form>
 </div>
 {% endblock %}

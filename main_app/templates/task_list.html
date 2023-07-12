@@ -5,6 +5,12 @@
 {% block content %}
   <h1 class="title_tasks-l">Tasks Lists</h1>
 
+  <a href="{% url 'task_create' %}" class="button is-primary create-task-button">
+    <span class="icon">
+      <i class="fas fa-plus"></i>
+    </span>
+  </a>
+
   <table class="task-table">
     <thead>
       <tr>
