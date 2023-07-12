@@ -1,12 +1,11 @@
 from django.urls import reverse
-from django.shortcuts import render, redirect
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from .models import Project, Task
+from .models import Project, Task, TaskComplete
 from django.http import HttpResponse 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView
-# from .views import TaskComplete
 
 
 
@@ -184,4 +183,11 @@ class TaskList(ListView):
         return redirect(request, 'task_list.html', context)
 
 
-# TaskCompleted
+class TaskComplete(TemplateView):
+    def post(self, request, pk):
+        task = get_object_or_404(Task, pk=pk)
+        TaskComplete.objects.create(task=task)
+        return redirect('task_list')
+
+# 'get_object_or_404' provides a convenient way to handle the case where the task does not exist by automatically returning a 404 response see documentation for more details"
+# https://docs.djangoproject.com/en/4.2/topics/http/shortcuts/ 

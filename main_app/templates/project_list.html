@@ -3,23 +3,23 @@
 {% block title %}Projects List{% endblock %}
 
 {% block content %}
-  <div class="project-list">
-    <h1 class="title pt-5">{{header}}</h1>
+    <div class="project-list">
+        <h1 class="title pt-5">{{header}}</h1>
     
     <div class="search-feature">
         <form class="mb-5" method="get">
             <div class="field has-addons">
-              <div class="control">
-                <!--  Our input will search by title of project  -->
-                <input class="input" type="text" name="title" placeholder="title" />
-              </div>
-              <div class="control">
+                <div class="control">
+                    <!--  Our input will search by title of project  -->
+                    <input class="input" type="text" name="title" placeholder="title" />
+                </div>
+                <div class="control">
                 <input class="button custom-button-search" type="submit" value="Search" />
-              </div>
+                </div>
             </div>
             <!--  This anchor tag will redirect back to project list without a query param -->
             <a class="button is-dark" href="{% url 'project_list' %}">Clear Search</a>
-          </form>
+        </form>
     </div>
 
     <div class="add-project-btn">
@@ -27,9 +27,9 @@
     </div>
 
     {% if projects %}
-      <div class="project-grid">
-        {% for project in projects %}
-          <a href="{% url 'project_detail' project.pk %}" class="project-item">
+        <div class="project-grid">
+            {% for project in projects %}
+            <a href="{% url 'project_detail' project.pk %}" class="project-item">
             <h2 class="project-title">{{ project.title }}</h2>
             <hr>
             <div class="project-info">
@@ -46,11 +46,12 @@
                     <strong>Status:</strong> {{ project.get_status_display }}
                 </div>
             </div>
-          </a>
-        {% endfor %}
-      </div>
+            </a>
+            
+            {% endfor %}
+        </div>
     {% else %}
-      <p>No projects found.</p>
+        <p>No projects found.</p>
     {% endif %}
-  </div>
+    </div>
 {% endblock %}

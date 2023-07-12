@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -52,3 +53,10 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
+    
+class TaskComplete(models.Model):
+    task = models.ForeignKey(Task, on_delete=models.CASCADE)
+    completed_at = models.DateTimeField(default=timezone.now)
+
+    def __str__(self):
+        return self.task.title

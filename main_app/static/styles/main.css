@@ -565,56 +565,56 @@ body {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 20px;
-  }
-  
-  .task-table th,
-  .task-table td {
+}
+
+.task-table th,
+.task-table td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #E2E2E2;
-  }
-  
-  .task-table th {
+}
+
+.task-table th {
     background-color: #FA0644;
     color: #FFFFFF;
-  }
-  
-  .task-table .task-title {
+}
+
+.task-table .task-title {
     color: #000000;
-  }
-  
-  .task-table .task-importance {
+}
+
+.task-table .task-importance {
     color: #38B6FF;
-  }
-  
-  .task-table .task-due-date {
+}
+
+.task-table .task-due-date {
     color: #FA5300;
-  }
-  
-  .task-table .task-completed {
+}
+
+.task-table .task-completed {
     color: #40A456;
-  }
-  
-  .task-table .task-not-completed {
+}
+
+.task-table .task-not-completed {
     color: #BF2026;
-  }
-  
-  .completed-tasks-table {
+}
+
+.completed-tasks-table {
     border-collapse: collapse;
     width: 100%;
-  }
-  
-  .completed-tasks-table th,
-  .completed-tasks-table td {
+}
+
+.completed-tasks-table th,
+.completed-tasks-table td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-  }
-  
-  .completed-tasks-table th {
+}
+
+.completed-tasks-table th {
     background-color: #FA5300;
     color: #FFFFFF;
-  } 
+} 
 
 
   .tasks-to-do-table {
