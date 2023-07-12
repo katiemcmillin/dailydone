@@ -70,9 +70,9 @@
                                     <input type="checkbox" class="task-checkbox" onchange="this.form.submit()" {% if task.is_completed %}checked{% endif %}>
                                 </form>
                             </td>
-                            <td>{{ task.title }}</td>
-                            <td>{{ task.get_importance_display|title }}</td>
-                            <td>{{ task.due_date }}</td>
+                            <td><span class="task-title">{{ task.title }}</span></td>
+                            <td><span class="task-importance">{{ task.get_importance_display|title }}</span></td>
+                            <td><span class="task-due_date">{{ task.due_date }}</span></td>
                             {% comment %} <td>
                                 <a href="{% url 'task_update' task.pk %}" class="button is-info">
                                     <span class="icon">

@@ -1,48 +1,65 @@
 {% extends 'base.html' %} 
-
+{% load static %}
 {% block title %}Project Create{% endblock %} 
 
 {% block content %}
-<h1 class="title-create-project">Add a Project</h1>
 
-<div class="link-go-back-new">
-    <a href="{% url 'project_list' %}">> Go back</a>
-</div>
+<style> 
+    #project-create-page-container {
+        background-image: url("{% static 'main_app/images/image_create_project-page.jpeg' %}");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        background-size: cover;
+        min-height: 200vh; 
+        margin-bottom: -7rem;
+    }
+</style>
 
-<div class="form-container">
-    <form method="post">
-        <!-- Security Feature  -->
-        {% csrf_token %} 
-        <!--  Generate inputs  -->
-        <div class="form-input">
-            <label for="{{ form.title.id_for_label }}"><strong>Title:</strong></label>
-            {{ form.title }}
-        </div>
-        <div class="form-input">
-            <label for="{{ form.description.id_for_label }}"><strong>Description:</strong></label>
-            {{ form.description }}
-        </div>
-        <div class="form-input">
-            <label for="{{ form.start_date.id_for_label }}"><strong>Start Date:</strong></label>
-            {{ form.start_date }}
-        </div>
-        <span class="date-instruction">Enter date in MM/DD/YYYY format</span>
-        <div class="form-input">
-            <label for="{{ form.due_date.id_for_label }}"><strong>Due Date:</strong></label>
-            {{ form.due_date }}
-        </div>
-        <span class="date-instruction">Enter date in MM/DD/YYYY format</span>
-        <div class="form-input">
-            <label for="{{ form.importance.id_for_label }}"><strong>Importance:</strong></label>
-            {{ form.importance }}
-        </div>
-        <div class="form-input">
-            <label for="{{ form.status.id_for_label }}"><strong>Status:</strong></label>
-            {{ form.status }}
-        </div>
-        <!--  Submit form  -->
-        <input type="submit" value="Submit" />
-    </form>
+
+<div id="project-create-page-container"> 
+    <h1 class="title-create-project">Add a Project</h1>
+
+    <div class="link-go-back-new">
+        <a href="{% url 'project_list' %}">> Go back</a>
+    </div>
+
+    <div class="form-container">
+        <form method="post">
+            <!-- Security Feature  -->
+            {% csrf_token %} 
+            <!--  Generate inputs  -->
+            <div class="form-input">
+                <label for="{{ form.title.id_for_label }}"><strong>Title:</strong></label>
+                {{ form.title }}
+            </div>
+            <div class="form-input">
+                <label for="{{ form.description.id_for_label }}"><strong>Description:</strong></label>
+                {{ form.description }}
+            </div>
+            <div class="form-input">
+                <label for="{{ form.start_date.id_for_label }}"><strong>Start Date:</strong></label>
+                {{ form.start_date }}
+            </div>
+            <span class="date-instruction">Enter date in MM/DD/YYYY format</span>
+            <div class="form-input">
+                <label for="{{ form.due_date.id_for_label }}"><strong>Due Date:</strong></label>
+                {{ form.due_date }}
+            </div>
+            <span class="date-instruction">Enter date in MM/DD/YYYY format</span>
+            <div class="form-input">
+                <label for="{{ form.importance.id_for_label }}"><strong>Importance:</strong></label>
+                {{ form.importance }}
+            </div>
+            <div class="form-input">
+                <label for="{{ form.status.id_for_label }}"><strong>Status:</strong></label>
+                {{ form.status }}
+            </div>
+            <!--  Submit form  -->
+            <input type="submit" value="Submit" />
+        </form>
+    </div>
+
 </div>
 
 {% endblock %}

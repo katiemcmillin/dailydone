@@ -20,8 +20,18 @@
 <div id="task-create-page-container"> 
     <h1 class="title_tasks-l2">Create New Task</h1>
 
+    {% comment %} Go back to see the tasks list {% endcomment %}
     <div class="link-go-back-new-task">
         <a href="{% url 'task_list' %}">> Go back</a>
+    </div>
+
+    {% comment %} Possibility to create a new projet if it is missing from the list {% endcomment %}
+    <div class="field-new-project-missing">
+        <label class="label">Need to add a new Project?</label>
+        <div class="control">
+            {{ field }}
+            <a href="{% url 'project_create' %}" class="button is-primary">Create New Project</a>
+        </div>
     </div>
 
     <form class="form-create-task" action="{% url 'task_create' %}" method="post">
@@ -44,14 +54,6 @@
         </div>
         <span class="date-instruction-task-cr">Enter date in MM/DD/YYYY format for Due Date.</span>
     </form>
-
-    <div class="field">
-        <label class="label">Need to add a new Project?</label>
-        <div class="control">
-            {{ field }}
-            <a href="{% url 'project_create' %}" class="button is-primary">Create New Project</a>
-        </div>
-    </div>
 
 </div>
     

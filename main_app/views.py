@@ -2,7 +2,7 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from .models import Project, Task, TaskComplete
-from django.http import HttpResponse 
+from django.http import HttpResponse, HttpResponseRedirect 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView
@@ -186,6 +186,11 @@ class TaskList(ListView):
         context = super().get_context_data(**kwargs)
         context['completed_tasks'] = Task.objects.filter(is_completed=True)
         return context
+    
+
+class TaskDetail(DetailView):
+    model = Task
+    template_name = 'task_detail.html'
 
 
 class TaskComplete(TemplateView):
@@ -229,3 +234,26 @@ class TaskCreate(CreateView):
             return redirect(self.success_url)
         else:
             return self.form_invalid(form)
+
+
+class TaskDelete(DeleteView):
+    model = Task
+    template_name = "task_delete_confirmation.html"
+
+    def get_success_url(self):
+        return reverse('task_list')  # redirect to task_list after deleting a task
+
+    def delete(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        response = super().delete(request, *args, **kwargs)
+        return response
+
+
+    # def delete(self, request, *args, **kwargs):
+    #     self.object = self.get_object()
+    #     self.project_pk = self.object.project.pk  # Save the project id before deleting the task
+    #     self.object.delete()
+    #     return HttpResponseRedirect(self.get_success_url())
+
+    # def get_success_url(self):
+    #     return reverse('project_detail', kwargs={'pk': self.project_pk})  # I use the saved project id here

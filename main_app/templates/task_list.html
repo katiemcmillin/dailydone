@@ -3,95 +3,117 @@
 {% block title %}Tasks List{% endblock %} 
 
 {% block content %}
-  <h1 class="title_tasks-l">Tasks Lists</h1>
+<h1 class="title_tasks-l">Tasks Lists</h1>
 
-  <a href="{% url 'task_create' %}" class="button is-primary create-task-button">
+{% comment %} button add a taskto the list {% endcomment %}
+<a href="{% url 'task_create' %}" class="button is-primary create-task-button">
     <span class="icon">
-      <i class="fas fa-plus"></i>
+        <i class="fas fa-plus"></i>
     </span>
-  </a>
+    </a>
 
-  <table class="task-table">
+{% comment %} link to click "See Projects List" {% endcomment %}
+<div class="project-list-link-taskpg">
+    <a href="{% url 'project_list' %}">View Projects</a>
+</div>
+
+<table class="task-table">
     <thead>
-      <tr>
-        <th>Title</th>
-        <th>Importance</th>
-        <th>Due Date</th>
-        <th>Completion Status</th>
-        <th>To Do</th>
-      </tr>
+        <tr>
+            <th>Title</th>
+            <th>Importance</th>
+            <th>Due Date</th>
+            <th>Completion Status</th>
+            <th>To Do</th>
+            <th>Action</th>
+        </tr>
     </thead>
     <tbody>
-      {% for task in tasks %}
-      <tr>
-        <td class="task-title">
-          {{ task.title }}
-        </td>
-        <td class="task-importance">{{ task.importance }}</td>
-        <td class="task-due-date">{{ task.due_date }}</td>
-        <td class="{% if task.is_completed %}task-completed{% else %}task-not-completed{% endif %}">
-          {{ task.is_completed }}
-        </td>
-        <td class="task-todo">{% if not task.is_completed %}<input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()"> {% endif %}</td>
-      </tr>
-      {% endfor %}
+        {% for task in tasks %}
+        <tr>
+            <td class="task-title">
+                <a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a>
+            </td>
+            <td class="task-importance">{{ task.importance }}</td>
+            <td class="task-due-date">{{ task.due_date }}</td>
+            <td class="{% if task.is_completed %}task-completed{% else %}task-not-completed{% endif %}">
+                {{ task.is_completed }}
+            </td>
+            <td class="task-todo">{% if not task.is_completed %}<input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()"> {% endif %}</td>
+            <td>
+                {% comment %} <a href="{% url 'task_update' task.pk %}" class="button update-button">
+                    <i class="fas fa-edit"></i> 
+                </a> {% endcomment %}
+                <a href="{% url 'task_delete' task.pk %}" class="button delete-button">
+                    <i class="fas fa-trash-alt"></i> 
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
     </tbody>
-  </table>
+</table>
 
-  <h2 class="sub-title-tasks-pg-1">Tasks To Do</h2>
+<h2 class="sub-title-tasks-pg-1">Tasks To Do</h2>
 
-  <table class="tasks-to-do-table">
+<table class="tasks-to-do-table">
     <thead>
-      <tr>
-        <th>Title</th>
-        <th>Importance</th>
-        <th>Due Date</th>
-        <th>To Do</th>
-      </tr>
+        <tr>
+            <th>Title</th>
+            <th>Importance</th>
+            <th>Due Date</th>
+            <th>To Do</th>
+            <th>Action</th>
+        </tr>
     </thead>
     <tbody>
-      {% for task in tasks %}
-      {% if not task.is_completed %}
-      <tr>
-        <td>{{ task.title }}</td>
-        <td>{{ task.importance }}</td>
-        <td>{{ task.due_date }}</td>
-        <td class="task-todo">{% if not task.is_completed %}<input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()"> {% endif %}</td>
-      </tr>
-      </tr>
-      {% endif %}
-      {% endfor %}
+        {% for task in tasks %}
+        {% if not task.is_completed %}
+        <tr>
+            <td>{{ task.title }}</td>
+            <td>{{ task.importance }}</td>
+            <td>{{ task.due_date }}</td>
+            <td class="task-todo">{% if not task.is_completed %}<input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()"> {% endif %}</td>
+            <td>
+                {% comment %} <a href="{% url 'task_update' task.pk %}" class="button update-button">
+                    <i class="fas fa-edit"></i> 
+                </a> {% endcomment %}
+                <a href="{% url 'task_delete' task.pk %}" class="button delete-button">
+                    <i class="fas fa-trash-alt"></i> 
+                </a>
+            </td>
+        </tr>
+        </tr>
+        {% endif %}
+        {% endfor %}
     </tbody>
-  </table>
+</table>
 
 
-  <h2 class="sub-title-tasks-pg-2">Completed Tasks</h2>
+<h2 class="sub-title-tasks-pg-2">Completed Tasks</h2>
 
-  <table class="completed-tasks-table">
+<table class="completed-tasks-table">
     <thead>
-      <tr>
-        <th>Title</th>
-        <th>Importance</th>
-        <th>Due Date</th>
-        <th>To Do</th>
-      </tr>
+        <tr>
+            <th>Title</th>
+            <th>Importance</th>
+            <th>Due Date</th>
+            <th>To Do</th>
+        </tr>
     </thead>
     <tbody>
-      {% for task in tasks %}
-      {% if task.is_completed %}
-      <tr>
-        <td>{{ task.title }}</td>
-        <td>{{ task.importance }}</td>
-        <td>{{ task.due_date }}</td>
-        <td>Done</td>
-      </tr>
-      </tr>
-      {% endif %}
-      {% endfor %}
+        {% for task in tasks %}
+        {% if task.is_completed %}
+        <tr>
+            <td>{{ task.title }}</td>
+            <td>{{ task.importance }}</td>
+            <td>{{ task.due_date }}</td>
+            <td>Done</td>
+    </tr>
+    </tr>
+        {% endif %}
+        {% endfor %}
     </tbody>
-  </table>
+</table>
 
 
-
-
-  {% endblock %}
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block title %}Task Detail{% endblock %}
+
+{% block content %}
+    <div id="task-detail">
+        <h1 class="task-title">{{ task.title }}</h1>
+        <p><span class="detail-heading">Project:</span> <br> {{ task.project.title }}</p>
+        <p><span class="detail-heading">Description:</span> <br> {{ task.description }}</p>
+        <p><span class="detail-heading">Completed:</span> <br> {{ task.is_completed }}</p>
+        <p><span class="detail-heading">Level of Importance:</span> <br> {{ task.importance }}</p>
+        <p><span class="detail-heading">Due Date:</span> <br> {{ task.due_date }}</p>
+        <p><span class="detail-heading">Created On:</span> <br> {{ task.created_on }}</p>
+        
+        <div id="task-actions">
+        {% comment %} <a href="{% url 'task_edit' task.id %}"><i class="fas fa-edit"></i> Edit</a> {% endcomment %}
+        <a href="{% url 'task_delete' task.id %}"><i class="fas fa-trash"></i></a>
+        </div>
+
+        <div id="navigation-links">
+        <a href="{% url 'task_list' %}">> Back to Tasks</a> <br>
+        <a href="{% url 'project_list' %}">> Back to Projects</a>
+        </div>
+    </div>
+{% endblock %}
