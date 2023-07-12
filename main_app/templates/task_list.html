@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}Tasks List{% endblock %} 
+
+{% block content %}
+  <h1 class="title_tasks-l">Tasks Lists</h1>
+
+  <table class="task-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Importance</th>
+        <th>Due Date</th>
+        <th>Completion Status</th>
+        <th>To Do</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      <tr>
+        <td class="task-title">
+          {{ task.title }}
+        </td>
+        <td class="task-importance">{{ task.importance }}</td>
+        <td class="task-due-date">{{ task.due_date }}</td>
+        <td class="{% if task.is_completed %}task-completed{% else %}task-not-completed{% endif %}">
+          {{ task.is_completed }}
+        </td>
+        <td class="task-todo">{% if not task.is_completed %}<input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()"> {% endif %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+
+  <h2 class="sub-title-tasks-pg-1">Tasks To Do</h2>
+
+  <table class="tasks-to-do-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Importance</th>
+        <th>Due Date</th>
+        <th>To Do</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      {% if not task.is_completed %}
+      <tr>
+        <td>{{ task.title }}</td>
+        <td>{{ task.importance }}</td>
+        <td>{{ task.due_date }}</td>
+        <td class="task-todo">{% if not task.is_completed %}<input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()"> {% endif %}</td>
+      </tr>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+  <h2 class="sub-title-tasks-pg-2">Completed Tasks</h2>
+
+  <table class="completed-tasks-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Importance</th>
+        <th>Due Date</th>
+        <th>To Do</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for task in tasks %}
+      {% if task.is_completed %}
+      <tr>
+        <td>{{ task.title }}</td>
+        <td>{{ task.importance }}</td>
+        <td>{{ task.due_date }}</td>
+        <td>Done</td>
+      </tr>
+      </tr>
+      {% endif %}
+      {% endfor %}
+    </tbody>
+  </table>
+
+
+
+
+  {% endblock %}

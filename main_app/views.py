@@ -1,13 +1,14 @@
 from django.urls import reverse
-from django.shortcuts import redirect
-from django.views import View 
-from .models import Project, Task 
+from django.shortcuts import render, redirect
+from django.views import View
+from .models import Project, Task
 from django.http import HttpResponse 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
+# from .views import TaskComplete
 
-from django.views.generic import DetailView
+
 
 class Home(TemplateView):
     template_name = "home.html"
@@ -147,7 +148,8 @@ class TaskCreate(View):
     def post(self, request, pk):
         title = request.POST.get("title")
         description = request.POST.get("description")
-        is_completed = request.POST.get("is_completed")
+        # look if is_completed's box is checked. if yes, the value will be True otherwise it will be false
+        is_completed = request.POST.get("is_completed") == "on"  
         importance = request.POST.get("importance")
         completion_date = request.POST.get("completion_date")
         due_date = request.POST.get("due_date")
@@ -165,4 +167,21 @@ class TaskCreate(View):
             project=project
         )
         return redirect('project_detail', pk=pk)
-    
+
+class TaskList(ListView):
+    model = Task
+    template_name = 'task_list.html'
+    context_object_name = 'tasks'
+    ordering = 'due_date'
+
+    def task_list(request):
+        tasks = Task.objects.filter(is_completed=False)
+        completed_tasks = Task.objects.filter(is_completed=True)
+        context = {
+            'tasks': tasks,
+        '   completed_tasks': completed_tasks,
+        }
+        return redirect(request, 'task_list.html', context)
+
+
+# TaskCompleted

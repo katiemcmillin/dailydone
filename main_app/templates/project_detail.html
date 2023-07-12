@@ -43,42 +43,37 @@
 
         <!-- Here you can see the action we provided
     is to the task_create route with the project pk -->
+    <h2 class="completion-status-title">Completion Status</h2>
     <form class="mb-5 add_task" action="{% url 'task_create' project.pk %}" method="post">
-        {% csrf_token %}
-        <div class="field has-addons">
-            <div class="control">
-                <input
-                    class="input"
-                    type="text"
-                    name="title"
-                    placeholder="Title"
-                    required
-                />
-            </div>
-            <div class="control">
-                <div class="select">
-                    <select class="input" name="importance" required>
-                        <option value="" disabled selected>Select Importance</option>
-                        <option value="high">High Priority</option>
-                        <option value="medium">Medium Priority</option>
-                        <option value="low">Low Priority</option>
-                    </select>
-                </div>
-            </div>
-            <div class="control">
-                <input
-                    class="input"
-                    type="date"
-                    name="due_date"
-                    placeholder="Due Date"
-                    required
-                />
-            </div>
-            <div class="control">
-                <input class="button is-black" type="submit" value="Add Task" />
+    {% csrf_token %}
+    <div class="field has-addons">
+        <div class="control">
+            <label class="checkbox-add-task-pg">
+                <input type="checkbox" name="is_completed">
+            </label>
+        </div>
+        <div class="control">
+            <input class="input" type="text" name="title" placeholder="Title" required>
+        </div>
+        <div class="control">
+            <div class="select">
+                <select class="input" name="importance" required>
+                    <option value="" disabled selected>Select Importance</option>
+                    <option value="high">High Priority</option>
+                    <option value="medium">Medium Priority</option>
+                    <option value="low">Low Priority</option>
+                </select>
             </div>
         </div>
+        <div class="control">
+            <input class="input" type="date" name="due_date" placeholder="Due Date" required>
+        </div>
+        <div class="control">
+            <input class="button is-black" type="submit" value="Add Task">
+        </div>
+    </div>
     </form>
+
     
     <!-- before the for loop for tasks -->
 
