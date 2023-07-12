@@ -617,22 +617,22 @@ body {
 } 
 
 
-  .tasks-to-do-table {
+.tasks-to-do-table {
     border-collapse: collapse;
     width: 100%;
-  }
-  
-  .tasks-to-do-table th,
-  .tasks-to-do-table td {
+}
+
+.tasks-to-do-table th,
+.tasks-to-do-table td {
     padding: 8px;
     text-align: left;
     border-bottom: 1px solid #ddd;
-  }
-  
-  .tasks-to-do-table th {
+}
+
+.tasks-to-do-table th {
     background-color: #063854;
     color: #FFFFFF;
-  } 
+} 
 
 .title_tasks-l {
     color: Black;
@@ -795,7 +795,7 @@ body {
     border-radius: 5px;
 }
 
-.task-title {
+.task-title-detailpg {
     color: #000;
     font-size: 2.5em;
     margin-bottom: 30px;

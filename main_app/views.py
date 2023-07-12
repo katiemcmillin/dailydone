@@ -249,11 +249,3 @@ class TaskDelete(DeleteView):
         return response
 
 
-    # def delete(self, request, *args, **kwargs):
-    #     self.object = self.get_object()
-    #     self.project_pk = self.object.project.pk  # Save the project id before deleting the task
-    #     self.object.delete()
-    #     return HttpResponseRedirect(self.get_success_url())
-
-    # def get_success_url(self):
-    #     return reverse('project_detail', kwargs={'pk': self.project_pk})  # I use the saved project id here

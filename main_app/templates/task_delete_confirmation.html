@@ -4,20 +4,20 @@
 
 {% block content %}
 <div class="delete-page-container">
-  <div class="picture-delete-p">
-    <img class="image-delete-p" src="/static/main_app/images/task_delete_image.jpeg" alt="leaf colorfull" />
-  </div>
-  <h1 class="delete-page-title">
-    Are you sure you want to delete {{object.title}}?
-  </h1>
-  <form method="post">
-    {% csrf_token %}
-    <div class="buttons-delete-pg">
-      <!-- Confirm task delete -->
-      <input class="button is-danger custom-confirm-button" type="submit" value="Confirm" />
-      <!-- Redirect back to detail on cancel -->
-      <a class="button is-primary custom-cancel-button" href="{% url 'task_detail' object.pk %}">Cancel</a>
+    <div class="picture-delete-p">
+        <img class="image-delete-p" src="/static/main_app/images/task_delete_image.jpeg" alt="leaf colorfull" />
     </div>
-  </form>
+    <h1 class="delete-page-title">
+        Are you sure you want to delete {{object.title}}?
+    </h1>
+    <form method="post">
+        {% csrf_token %}
+        <div class="buttons-delete-pg">
+        <!-- Confirm task delete -->
+        <input class="button is-danger custom-confirm-button" type="submit" value="Confirm" />
+        <!-- Redirect back to detail on cancel -->
+        <a class="button is-primary custom-cancel-button" href="{% url 'task_detail' object.pk %}">Cancel</a>
+        </div>
+    </form>
 </div>
 {% endblock %}
