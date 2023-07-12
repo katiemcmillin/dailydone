@@ -40,6 +40,63 @@
 
     <div class="task-section">
         <h2 class="tasks-title">Tasks</h2>
+    
+        <!-- Add Task button -->
+        <a href="{% url 'project_task_create' project.pk %}" class="button is-info">
+            <span class="icon">
+                <i class="fas fa-plus"></i>
+            </span>
+            <span>Add Task</span>
+        </a>
+    
+        <!-- Task list -->
+        {% if project.tasks.exists %}
+            <table class="task-table">
+                <thead>
+                    <tr>
+                        <th>Status</th>
+                        <th>Title</th>
+                        <th>Importance</th>
+                        <th>Due Date</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for task in project.tasks.all %}
+                        <tr>
+                            <td>
+                                <form action="{% url 'task_complete' task.id %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="checkbox" class="task-checkbox" onchange="this.form.submit()" {% if task.is_completed %}checked{% endif %}>
+                                </form>
+                            </td>
+                            <td>{{ task.title }}</td>
+                            <td>{{ task.get_importance_display|title }}</td>
+                            <td>{{ task.due_date }}</td>
+                            {% comment %} <td>
+                                <a href="{% url 'task_update' task.pk %}" class="button is-info">
+                                    <span class="icon">
+                                        <i class="fas fa-edit"></i>
+                                    </span>
+                                </a>
+                                <a href="{% url 'task_delete' task.pk %}" class="button is-danger">
+                                    <span class="icon">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </span>
+                                </a>
+                            </td> {% endcomment %}
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <p>No tasks found for this project.</p>
+        {% endif %}
+    </div>
+
+
+    {% comment %} <div class="task-section">
+        <h2 class="tasks-title">Tasks</h2>
 
         <!-- Here you can see the action we provided
     is to the task_create route with the project pk -->
@@ -73,13 +130,13 @@
         <div class="control">
             <input class="button is-black" type="submit" value="Add Task">
         </div>
-    </div>
+    </div> {% endcomment %}
     </form>
 
     
     <!-- before the for loop for tasks -->
 
-        {% if project.tasks.exists %}
+        {% comment %} {% if project.tasks.exists %}
         <table class="task-table">
             <thead>
                 <tr>
@@ -129,7 +186,7 @@
                 <p>No tasks found for this project.</p>
             </div>
         </article>
-        {% endif %}
+        {% endif %} {% endcomment %}
     </div>
     
 </div>

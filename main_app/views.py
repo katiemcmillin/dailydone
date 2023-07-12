@@ -94,9 +94,13 @@ class ProjectCreate(CreateView):
     fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status']
     template_name = "project_create.html"
 
-    # this will get the pk from the route and redirect to project view
-    def get_success_url(self):
-        return reverse('project_detail', kwargs={'pk': self.object.pk})
+    def form_valid(self, form):
+        self.object = form.save()  # I store the newly created Project instance to access its 'pk'
+        return redirect('project_task_create', self.object.pk)  # I redirect to the 'project_task_create' view, passing the newly created Project's 'pk'
+
+    # # this will get the pk from the route and redirect to project view
+    # def get_success_url(self):
+    #     return reverse('project_detail', kwargs={'pk': self.object.pk})
 
 class ProjectList(TemplateView):
     template_name = "project_list.html"

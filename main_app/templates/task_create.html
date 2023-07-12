@@ -44,6 +44,15 @@
         </div>
         <span class="date-instruction-task-cr">Enter date in MM/DD/YYYY format for Due Date.</span>
     </form>
+
+    <div class="field">
+        <label class="label">Need to add a new Project?</label>
+        <div class="control">
+            {{ field }}
+            <a href="{% url 'project_create' %}" class="button is-primary">Create New Project</a>
+        </div>
+    </div>
+
 </div>
     
 {% endblock %}
