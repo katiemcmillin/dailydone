@@ -73,18 +73,20 @@
                             <td><span class="task-title">{{ task.title }}</span></td>
                             <td><span class="task-importance">{{ task.get_importance_display|title }}</span></td>
                             <td><span class="task-due_date">{{ task.due_date }}</span></td>
-                            {% comment %} <td>
-                                <a href="{% url 'task_update' task.pk %}" class="button is-info">
+                            {% comment %} update and delete tasks {% endcomment %}
+                            <td>
+                                <a href="{% url 'task_update' task.pk %}" class="button is-info update-icon">
                                     <span class="icon">
                                         <i class="fas fa-edit"></i>
                                     </span>
                                 </a>
-                                <a href="{% url 'task_delete' task.pk %}" class="button is-danger">
+                                <a href="{% url 'task_delete' task.pk %}" class="button is-danger delete-icon">
                                     <span class="icon">
                                         <i class="fas fa-trash-alt"></i>
                                     </span>
                                 </a>
-                            </td> {% endcomment %}
+                            </td>
+                            {% comment %} end  {% endcomment %}
                         </tr>
                     {% endfor %}
                 </tbody>

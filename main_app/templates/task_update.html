@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Update Task{% endblock %}
+
+{% block content %}
+
+
+<style> 
+    #task-update-global-page-container {
+        background-image: url("{% static 'main_app/images/task_update_img.jpeg' %}");
+        background-repeat: no-repeat;
+        background-position: center center;
+        background-attachment: fixed;
+        background-size: cover;
+        min-height: 200vh; 
+        margin-bottom: -5rem;
+        margin-top: -2rem;
+    }
+</style>
+
+<div id="task-update-global-page-container">
+    <div class="tsk-update-page-container">
+        <h1 class="title pt-5">Update {{ task.title }}</h1>
+
+        <form class="update-tsk-form" action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Submit" />
+        </form>
+        <a class="Go-back-link-tasks" href="{% url 'task_list' %}">> Go back - Tasks List</a>
+    </div>
+</div>
+{% endblock %}

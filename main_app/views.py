@@ -234,6 +234,14 @@ class TaskCreate(CreateView):
             return redirect(self.success_url)
         else:
             return self.form_invalid(form)
+        
+class TaskUpdate(UpdateView):
+    model = Task
+    template_name = 'task_update.html'
+    fields = ['title', 'description', 'is_completed', 'importance', 'project', 'due_date']
+
+    def get_success_url(self):
+        return reverse('task_detail', kwargs={'pk': self.object.pk})
 
 
 class TaskDelete(DeleteView):

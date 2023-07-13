@@ -16,6 +16,7 @@ urlpatterns = [
     # add, detail, update and remove task from a project
     path('projects/<int:pk>/tasks/new/', views.TaskCreate.as_view(), name='project_task_create'),
     path('tasks/<int:pk>/', views.TaskDetail.as_view(), name='task_detail'),
+    path('tasks/<int:pk>/update', views.TaskUpdate.as_view(), name='task_update'),
     path('tasks/<int:pk>/delete', views.TaskDelete.as_view(), name='task_delete'),
 
 ]

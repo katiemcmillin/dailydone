@@ -41,9 +41,9 @@
             </td>
             <td class="task-todo">{% if not task.is_completed %}<input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()"> {% endif %}</td>
             <td>
-                {% comment %} <a href="{% url 'task_update' task.pk %}" class="button update-button">
+                <a href="{% url 'task_update' task.pk %}" class="button update-button">
                     <i class="fas fa-edit"></i> 
-                </a> {% endcomment %}
+                </a>
                 <a href="{% url 'task_delete' task.pk %}" class="button delete-button">
                     <i class="fas fa-trash-alt"></i> 
                 </a>
@@ -74,9 +74,9 @@
             <td>{{ task.due_date }}</td>
             <td class="task-todo">{% if not task.is_completed %}<input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()"> {% endif %}</td>
             <td>
-                {% comment %} <a href="{% url 'task_update' task.pk %}" class="button update-button">
+                <a href="{% url 'task_update' task.pk %}" class="button update-button">
                     <i class="fas fa-edit"></i> 
-                </a> {% endcomment %}
+                </a>
                 <a href="{% url 'task_delete' task.pk %}" class="button delete-button">
                     <i class="fas fa-trash-alt"></i> 
                 </a>

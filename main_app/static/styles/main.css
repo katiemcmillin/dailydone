@@ -434,7 +434,6 @@ body {
 }
 }
 
-
 /* Project Update Page */
 
 
@@ -684,6 +683,20 @@ body {
     color: #FA0644;
 }
 
+.update-icon .icon {
+    color: white; 
+    font-size: 18px; 
+    width: 50%;
+    height: auto;
+}
+
+.delete-icon .icon {
+    color: white; 
+    font-size: 18px; 
+    width: 50%;
+    height: auto;
+}
+
 
 /* Task Create Page */
 
@@ -850,4 +863,77 @@ body {
 
 #navigation-links a:hover {
     color: #333;
+}
+
+/* Task Update Page */
+
+.tsk-update-page-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.8);
+    border-radius: 6px;
+    margin-top: 2rem;
+}
+
+.tsk-update-page-container h1 {
+    color: #333;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 20px;
+}
+
+.update-tsk-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.update-tsk-form p {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.update-tsk-form p strong {
+    color: #333;
+    font-size: 18px;
+}
+
+.update-tsk-form p input[type="text"],
+.update-tsk-form p textarea,
+.update-tsk-form p select {
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.3);
+}
+
+.update-tsk-form input[type="submit"] {
+    background-color: #063854;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.update-tsk-form input[type="submit"]:hover {
+    background-color: #0050B5;
+}
+
+.Go-back-link-tasks {
+    color: #063854;
+    text-decoration: none;
+    text-align: center;
+    display: block;
+    margin-top: 20px;
+}
+
+.Go-back-link-tasks:hover {
+    color: #0050B5;
 }
