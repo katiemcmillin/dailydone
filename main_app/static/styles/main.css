@@ -947,6 +947,7 @@ h1.login-title {
     font-size: 2.5em;
     letter-spacing: 1px;
     margin-top: 2rem;
+    
 }
 
 .login-form {
@@ -982,4 +983,98 @@ h1.login-title {
 
 .login-form input[type="submit"]:hover {
     background-color: #0D3B66;
+}
+
+p.has-text-centered {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+p.has-text-centered a.signup-link {
+    color: #40A456;
+    text-decoration: none;
+}
+
+p.has-text-centered a.signup-link:hover {
+    text-decoration: underline;
+}
+
+/* signup Page*/
+/* Same login a little */
+
+h1.signup-title {
+    text-align: center;
+    color: #0D3B66;
+    font-size: 2.5em;
+    letter-spacing: 1px;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.signup-form {
+    width: 500px;
+    margin: 0 auto;
+    padding: 30px;
+    border: 2px solid #0D3B66;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5);
+}
+
+.signup-form input[type="text"], .signup-form input[type="password"] {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    font-size: 1em;
+}
+
+.signup-form input[type="submit"] {
+    width: 100%;
+    padding: 15px;
+    color: #fff;
+    background-color: #BF2026;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.2em;
+    margin-top: 1rem;
+}
+
+.helptext {
+    font-size: 9px;
+    color: grey;
+    font-style: italic;
+    margin-top: 0;
+    
+}
+
+.signup-form .fieldWrapper input {
+    margin-bottom: 0;
+}
+
+.signup-form .fieldWrapper{
+    margin-top: 1rem;
+}
+.signup-form input[type="submit"]:hover {
+    background-color: #0D3B66;
+}
+
+p.has-text-centered {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 0.9em;
+}
+
+p.has-text-centered a.login-link {
+    color: #40A456;
+    text-decoration: none;
+}
+
+p.has-text-centered a.login-link:hover {
+    text-decoration: underline;
 }

@@ -1,14 +1,29 @@
 {% extends 'base.html' %} 
 
-{% block title %}Signup{% endblock %} 
+{% block title %}Dailydone Signup{% endblock %} 
 
 {% block content %}
 
-<h1 class="title">Sign Up</h1>
-<form method="post" action="{% url 'signup' %}">
-    {% csrf_token %} {{ form.as_p }}
+<h1 class="signup-title">Sign Up</h1>
+
+<form class="signup-form" method="post" action="{% url 'signup' %}">
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="fieldWrapper">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}
+                <span class="helptext">{{ field.help_text }}</span>
+            {% endif %}
+            {{ field.errors }}
+        </div>
+    {% endfor %}
     <input type="submit" class="btn" value="Sign Up" />
     <input type="hidden" name="next" value="{{ next }}" />
 </form>
+
+<p class="has-text-centered">
+    Already have an account? <a href="{% url 'login' %}" class="login-link">Log In</a>
+</p>
 
 {% endblock %}
