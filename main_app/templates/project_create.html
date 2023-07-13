@@ -55,6 +55,16 @@
                 <label for="{{ form.status.id_for_label }}"><strong>Status:</strong></label>
                 {{ form.status }}
             </div>
+            <div class="form-input">
+                <label for="{{ form.status.id_for_label }}"><strong>Admin:</strong></label>
+                {{ form.admin }}
+            </div>
+            <div class="form-input">
+                <label for="{{ form.status.id_for_label }}"><strong>Contributors:</strong></label>
+                {{ form.contributors }}
+                <br>
+                <span class="instruction-contributors">Hold down "Control" or "Command" on a Mac to select more than one.</span>
+            </div>
             <!--  Submit form  -->
             <input type="submit" value="Submit" />
         </form>

@@ -119,7 +119,7 @@ class About(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class ProjectCreate(CreateView):
     model = Project
-    fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status']
+    fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status', 'admin', 'contributors']
     template_name = "project_create.html"
 
     def form_valid(self, form):
@@ -178,7 +178,7 @@ class ProjectDetail(DetailView):
 @method_decorator(login_required, name='dispatch')
 class ProjectUpdate(UpdateView):
     model = Project
-    fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status']
+    fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status', 'admin', 'contributors']
     template_name = "project_update.html"
 
     def get_success_url(self):
@@ -204,6 +204,7 @@ class TaskCreate(View):
         created_at = request.POST.get("create_at")
 
         project = Project.objects.get(pk=pk)
+        admin = request.user  # Get the current user as the admin (user) of the task
         Task.objects.create(
             title=title,
             description=description,
@@ -212,7 +213,8 @@ class TaskCreate(View):
             completion_date=completion_date,
             due_date=due_date,
             created_at=created_at,
-            project=project
+            project=project,
+            admin=admin     # Assign the admin (user) to the task
         )
         return redirect('project_detail', pk=pk)
 
@@ -222,6 +224,10 @@ class TaskList(ListView):
     template_name = 'task_list.html'
     context_object_name = 'tasks'
     ordering = 'due_date'
+
+    def get_queryset(self):
+        # Filter tasks based on the logged-in user as the admin
+        return Task.objects.filter(admin=self.request.user)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

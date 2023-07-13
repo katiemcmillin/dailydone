@@ -304,6 +304,13 @@ body {
     margin-bottom: 1rem;
 }
 
+.instruction-contributors {
+    font-size: 8px;
+    color: grey;
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
 /* Project Detail Page */
 
 .project-detail {
@@ -539,6 +546,7 @@ body {
     color: #FA0644;
     text-decoration: underline;
 }
+
 
 /* Project Delete Page */
 

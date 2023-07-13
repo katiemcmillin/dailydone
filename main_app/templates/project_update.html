@@ -13,8 +13,10 @@
 
     <form class="update-form" action="" method="post">
     {% csrf_token %} {{form.as_p}}
+    <span class="instruction-contributors">Hold down "Control" or "Command" on a Mac to select more than one.</span>
     <input type="submit" value="Submit" />
     </form>
+    
 </div>
 
 {% endblock %}
