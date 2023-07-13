@@ -24,6 +24,6 @@ urlpatterns = [
     path('tasks/<int:pk>/complete', views.TaskComplete.as_view(), name='task_complete'),
     # Notifications
 
-    # Users
-    path('accounts/signup/', views.SignUp.as_view(), name='signup'),
+    # User
+    path('accounts/signup/', views.Signup.as_view(), name="signup"),
 ]

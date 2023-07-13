@@ -1,3 +1,9 @@
+from django.contrib.auth import login
+from django.contrib.auth.forms import UserCreationForm
+# Auth
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
+
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
@@ -10,13 +16,27 @@ from django.views.generic import DetailView, ListView
 class PublicHome(TemplateView):
     template_name = "public_home.html"
 
+@method_decorator(login_required, name='dispatch')
 class PrivateHome(TemplateView):
     template_name = "private_home.html"
 
-# See after to fix
-class SignUp(CreateView):
-    template_name = 'registration/signup.html'
-    success_url = "private/" 
+class Signup(View):
+    # show a form to fill out
+    def get(self, request):
+        form = UserCreationForm()
+        context = {"form": form}
+        return render(request, "registration/signup.html", context)
+    # on form submit, validate the form and login the user.
+    def post(self, request):
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect("artist_list")
+        else:
+            context = {"form": form}
+            return render(request, "registration/signup.html", context)
+
 
 
 class About(TemplateView):
@@ -96,6 +116,7 @@ class About(TemplateView):
 # ),
 # ]
 
+@method_decorator(login_required, name='dispatch')
 class ProjectCreate(CreateView):
     model = Project
     fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status']
@@ -108,7 +129,8 @@ class ProjectCreate(CreateView):
 
     def get_success_url(self):
         return reverse('project_detail', kwargs={'pk': self.object.pk})
-    
+
+@method_decorator(login_required, name='dispatch')
 class ProjectList(TemplateView):
     template_name = "project_list.html"
 
@@ -127,7 +149,8 @@ class ProjectList(TemplateView):
             # default header for not searching 
             context["header"] = "List Of Projects"
         return context
-    
+
+@method_decorator(login_required, name='dispatch')
 class ProjectDetail(DetailView):
     model = Project  
     template_name = "project_detail.html"  
@@ -152,7 +175,7 @@ class ProjectDetail(DetailView):
         
         return redirect('project_detail', pk=project.pk)
 
-
+@method_decorator(login_required, name='dispatch')
 class ProjectUpdate(UpdateView):
     model = Project
     fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status']
@@ -160,14 +183,16 @@ class ProjectUpdate(UpdateView):
 
     def get_success_url(self):
         return reverse('project_detail', kwargs={'pk': self.object.pk})
-    
+
+
+@method_decorator(login_required, name='dispatch')
 class ProjectDelete(DeleteView):
     model = Project
     template_name = "project_delete_confirmation.html"
     success_url = "/projects/"
 
+@method_decorator(login_required, name='dispatch')
 class TaskCreate(View):
-
     def post(self, request, pk):
         title = request.POST.get("title")
         description = request.POST.get("description")
@@ -191,6 +216,7 @@ class TaskCreate(View):
         )
         return redirect('project_detail', pk=pk)
 
+@method_decorator(login_required, name='dispatch')
 class TaskList(ListView):
     model = Task
     template_name = 'task_list.html'
@@ -202,12 +228,12 @@ class TaskList(ListView):
         context['completed_tasks'] = Task.objects.filter(is_completed=True)
         return context
     
-
+@method_decorator(login_required, name='dispatch')
 class TaskDetail(DetailView):
     model = Task
     template_name = 'task_detail.html'
 
-
+@method_decorator(login_required, name='dispatch')
 class TaskCompletedList(ListView):
     model = Task
     template_name = 'task_completed_list.html'
@@ -221,6 +247,7 @@ class TaskCompletedList(ListView):
         context['completed_tasks'] = self.get_queryset()
         return context
 
+@method_decorator(login_required, name='dispatch')
 class TaskComplete(TemplateView):
     template_name = "task_complete.html"
 
@@ -235,6 +262,7 @@ class TaskComplete(TemplateView):
 
         return render(request, 'task_complete.html', context)
 
+@method_decorator(login_required, name='dispatch')
 class TaskCreate(CreateView):
     model = Task
     fields = ['title', 'description', 'is_completed', 'importance','project', 'due_date']
@@ -258,7 +286,8 @@ class TaskCreate(CreateView):
             return redirect(self.success_url)
         else:
             return self.form_invalid(form)
-        
+
+@method_decorator(login_required, name='dispatch')       
 class TaskUpdate(UpdateView):
     model = Task
     template_name = 'task_update.html'
@@ -267,7 +296,7 @@ class TaskUpdate(UpdateView):
     def get_success_url(self):
         return reverse('task_detail', kwargs={'pk': self.object.pk})
 
-
+@method_decorator(login_required, name='dispatch')
 class TaskDelete(DeleteView):
     model = Task
     template_name = "task_delete_confirmation.html"
