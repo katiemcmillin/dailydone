@@ -1,20 +1,33 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}DailyDone Private Home{% endblock %}
 
 {% block content %}
-<div class="home-section">
-  <div class="home-left">
-    <h1 class="home-title">We turn chaos into order, and ideas into action. Making every day a productive one.</h1>
-    <a href="accounts/signup" class="signup-button">Sign Up</a>
-  </div>
-  
-  <div class="left-side-image">
-    <img
-      class="image-homepage"
-      src="/static/main_app/images/lightball_homepage.png"
-      alt="colorfull lightball"
-    />
+
+
+<style> 
+  #home-private-page-container {
+    background-image: url("{% static 'main_app/images/home_private_img.jpeg' %}");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-size: cover;
+    min-height: 100vh;
+    margin-bottom: -7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+
+
+<div id="home-private-page-container">
+  <div class="home-section">
+    <h1 class="home-title">Transforming chaos into order and ideas into action, we empower you to make every day productive. Start a project now, create your tasks, and make it happen, whether alone or as a group.</h1>
+    <br>
+    <div class="link-project-home-pg">
+      <a href="/projects/new" class="signup-button">Create a Project</a>
+    </div>
   </div>
 </div>
 {% endblock %}

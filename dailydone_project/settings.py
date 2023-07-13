@@ -130,6 +130,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'main_app/static')]
 
 # Add this variable to specify where successful logins should redirect to
-LOGIN_REDIRECT_URL = 'private/'
+LOGIN_REDIRECT_URL = 'private_home'
 
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'public_home'
