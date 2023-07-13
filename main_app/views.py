@@ -121,22 +121,48 @@ class ProjectList(TemplateView):
             context["header"] = "List Of Projects"
         return context
     
-
 class ProjectDetail(DetailView):
-    model = Project
-    template_name = "project_detail.html"
+    model = Project  
+    template_name = "project_detail.html"  
+
+    # Override the get_context_data method
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)  
+        context['tasks'] = Task.objects.filter(project=self.object, is_completed=False)
+        return context
 
     def post(self, request, *args, **kwargs):
-        project = self.get_object()
-        task_ids = request.POST.getlist('task_ids[]')  
+        project = self.get_object()  # Get the Project instance
+        task_ids = request.POST.getlist('task_ids[]')  # Get the task IDs from the request POST data
+        # Filter tasks that have an ID in task_ids
+        print(task_ids) 
         completed_tasks = Task.objects.filter(pk__in=task_ids)
         
         for task in completed_tasks:
-            task.is_completed = True
-            task.save()
-            TaskComplete.objects.create(task=task)
+            task.is_completed = True  # Mark the task as completed
+            task.save()  # Save the changes
+            TaskComplete.objects.create(task=task)  # Create a TaskComplete instance for the task
         
         return redirect('project_detail', pk=project.pk)
+
+
+
+
+# class ProjectDetail(DetailView):
+#     model = Project
+#     template_name = "project_detail.html"
+
+#     def post(self, request, *args, **kwargs):
+#         project = self.get_object()
+#         task_ids = request.POST.getlist('task_ids[]')  
+#         completed_tasks = Task.objects.filter(pk__in=task_ids)
+        
+#         for task in completed_tasks:
+#             task.is_completed = True
+#             task.save()
+#             TaskComplete.objects.create(task=task)
+        
+#         return redirect('project_detail', pk=project.pk)
 
 class ProjectUpdate(UpdateView):
     model = Project
@@ -193,6 +219,20 @@ class TaskDetail(DetailView):
     template_name = 'task_detail.html'
 
 
+
+class TaskCompletedList(ListView):
+    model = Task
+    template_name = 'task_completed_list.html'
+    context_object_name = 'tasks'  
+
+    def get_queryset(self):
+        return Task.objects.filter(is_completed=True)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['completed_tasks'] = self.get_queryset()
+        return context
+
 class TaskComplete(TemplateView):
     template_name = "task_complete.html"
 
@@ -206,10 +246,6 @@ class TaskComplete(TemplateView):
         context = {'completed_tasks': completed_tasks}
 
         return render(request, 'task_complete.html', context)
-
-# 'get_object_or_404' provides a convenient way to handle the case where the task does not exist by automatically returning a 404 response see documentation for more details"
-# https://docs.djangoproject.com/en/4.2/topics/http/shortcuts/ 
-
 
 class TaskCreate(CreateView):
     model = Task

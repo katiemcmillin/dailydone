@@ -67,7 +67,7 @@
                             <td>
                                 <form action="{% url 'task_complete' task.id %}" method="post">
                                     {% csrf_token %}
-                                    <input type="checkbox" class="task-checkbox" onchange="this.form.submit()" {% if task.is_completed %}checked{% endif %}>
+                                    <input type="checkbox" class="complete-task-checkbox" data-task-id="{{ task.id }}" onchange="this.form.submit()" {% if task.is_completed %}checked{% endif %}>
                                 </form>
                             </td>
                             <td><span class="task-title">{{ task.title }}</span></td>
@@ -82,7 +82,7 @@
                                 </a>
                                 <a href="{% url 'task_delete' task.pk %}" class="button is-danger delete-icon">
                                     <span class="icon">
-                                        <i class="fas fa-trash-alt"></i>
+                                        <i class="fas fa-times"></i>
                                     </span>
                                 </a>
                             </td>
@@ -94,104 +94,7 @@
         {% else %}
             <p>No tasks found for this project.</p>
         {% endif %}
-    </div>
-
-
-    {% comment %} <div class="task-section">
-        <h2 class="tasks-title">Tasks</h2>
-
-        <!-- Here you can see the action we provided
-    is to the task_create route with the project pk -->
-    <h2 class="completion-status-title">Completion Status</h2>
-    <form class="mb-5 add_task" action="{% url 'task_create' project.pk %}" method="post">
-    {% csrf_token %}
-    <div class="field has-addons">
-
-        <div class="control">
-            <label class="checkbox-add-task-pg">
-                <input type="checkbox" name="task_ids[]" value="{{ task.id }}">
-            </label>
-        </div>
-
-        <div class="control">
-            <input class="input" type="text" name="title" placeholder="Title" required>
-        </div>
-        <div class="control">
-            <div class="select">
-                <select class="input" name="importance" required>
-                    <option value="" disabled selected>Select Importance</option>
-                    <option value="high">High Priority</option>
-                    <option value="medium">Medium Priority</option>
-                    <option value="low">Low Priority</option>
-                </select>
-            </div>
-        </div>
-        <div class="control">
-            <input class="input" type="date" name="due_date" placeholder="Due Date" required>
-        </div>
-        <div class="control">
-            <input class="button is-black" type="submit" value="Add Task">
-        </div>
-    </div> {% endcomment %}
-    </form>
-
-    
-    <!-- before the for loop for tasks -->
-
-        {% comment %} {% if project.tasks.exists %}
-        <table class="task-table">
-            <thead>
-                <tr>
-                    <th>Status</th>
-                    <th>Title</th>
-                    <th>Importance</th>
-                    <th>Due Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for task in project.tasks.all %}
-                {% if not task.is_completed %}
-                <tr>
-                    <td><input type="checkbox" class="task-checkbox" {% if task.is_completed %}checked{% endif %}></td>
-                    <td><a href="{% url 'task_complete' task.pk %}">{{ task.title }}</a></td>
-                    <td><span class="task-importance">{{ task.get_importance_display|title }}</span></td>
-                    <td><span class="task-due_date">{{ task.due_date }}</span></td>
-                </tr>
-                {% endif %}
-                {% endfor %}
-            </tbody>
-        </table>
-        {% if project.completed_tasks.exists %}
-        <h2 class="tasks-title">Completed Tasks:</h2>
-        <table class="task-table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Importance</th>
-                    <th>Due Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for task in project.completed_tasks.all %}
-                <tr>
-                    <td>{{ task.title }}</td>
-                    <td>{{ task.get_importance_display|title }}</td>
-                    <td>{{ task.due_date }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-        {% endif %}
-        {% else %}
-        <article class="message">
-            <div class="message-header">
-                <p>No tasks found for this project.</p>
-            </div>
-        </article>
-        {% endif %} {% endcomment %}
-    </div>
-    
+    </div> 
 </div>
-
 
 {% endblock %}
