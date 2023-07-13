@@ -53,6 +53,7 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="tasks")
     contributors = models.ManyToManyField(User, related_name='contributed_tasks', blank=True)
+    admin = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
