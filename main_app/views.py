@@ -2,15 +2,22 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from .models import Project, Task, TaskComplete
-from django.http import HttpResponse, HttpResponseRedirect 
+from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView
 
+class PublicHome(TemplateView):
+    template_name = "public_home.html"
 
+class PrivateHome(TemplateView):
+    template_name = "private_home.html"
 
-class Home(TemplateView):
-    template_name = "home.html"
+# See after to fix
+class SignUp(CreateView):
+    template_name = 'registration/signup.html'
+    success_url = "private/" 
+
 
 class About(TemplateView):
     template_name = "about.html"
@@ -95,13 +102,13 @@ class ProjectCreate(CreateView):
     template_name = "project_create.html"
 
     def form_valid(self, form):
+        form.instance.admin = self.request.user  # logged-in admin(user) to the form
         self.object = form.save()  # I store the newly created Project instance to access its 'pk'
         return redirect('project_task_create', self.object.pk)  # I redirect to the 'project_task_create' view, passing the newly created Project's 'pk'
 
-    # # this will get the pk from the route and redirect to project view
-    # def get_success_url(self):
-    #     return reverse('project_detail', kwargs={'pk': self.object.pk})
-
+    def get_success_url(self):
+        return reverse('project_detail', kwargs={'pk': self.object.pk})
+    
 class ProjectList(TemplateView):
     template_name = "project_list.html"
 
@@ -111,12 +118,12 @@ class ProjectList(TemplateView):
         title = self.request.GET.get("title")
         # If a query exists we will filter by title 
         if title != None:
-            # .filter is the sql WHERE statement and title__icontains is doing a search for any title that contains the query param
-            context["projects"] = Project.objects.filter(title__icontains=title)
+            # .filter is the sql WHERE statement and title__icontains is doing a search for any title that contains the query param and link to the admin who is links to the project
+            context["projects"] = Project.objects.filter(title__icontains=title, admin=self.request.user)
             # We add a header context that includes the search param
             context["header"] = f"Searching for {title}"
         else:
-            context["projects"] = Project.objects.all()
+            context["projects"] = Project.objects.filter(admin=self.request.user)
             # default header for not searching 
             context["header"] = "List Of Projects"
         return context
@@ -145,24 +152,6 @@ class ProjectDetail(DetailView):
         
         return redirect('project_detail', pk=project.pk)
 
-
-
-
-# class ProjectDetail(DetailView):
-#     model = Project
-#     template_name = "project_detail.html"
-
-#     def post(self, request, *args, **kwargs):
-#         project = self.get_object()
-#         task_ids = request.POST.getlist('task_ids[]')  
-#         completed_tasks = Task.objects.filter(pk__in=task_ids)
-        
-#         for task in completed_tasks:
-#             task.is_completed = True
-#             task.save()
-#             TaskComplete.objects.create(task=task)
-        
-#         return redirect('project_detail', pk=project.pk)
 
 class ProjectUpdate(UpdateView):
     model = Project
@@ -217,7 +206,6 @@ class TaskList(ListView):
 class TaskDetail(DetailView):
     model = Task
     template_name = 'task_detail.html'
-
 
 
 class TaskCompletedList(ListView):

@@ -3,7 +3,9 @@ from . import views
 
 
 urlpatterns = [
-    path('', views.Home.as_view(), name="home"),
+    path('', views.PublicHome.as_view(), name="public_home"),
+    path('private/', views.PrivateHome.as_view(), name='private_home'),
+    # path('', views.Home.as_view(), name="home"),
     path('about/', views.About.as_view(), name='about'),
     path('projects/', views.ProjectList.as_view(), name='project_list'),
     path('projects/new/', views.ProjectCreate.as_view(), name="project_create"),
@@ -23,4 +25,5 @@ urlpatterns = [
     # Notifications
 
     # Users
+    path('accounts/signup/', views.SignUp.as_view(), name='signup'),
 ]

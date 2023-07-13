@@ -37,9 +37,9 @@
         <span aria-hidden="true"></span>
       </a>
     </div>
-    <div class="navbar-menu navbar-start">
-      <a class="navbar-item" href="/about">About</a>
-    </div>
+    
+{% comment %} If admin(user) is authentificated) {% endcomment %}
+    {% if admin.is_authenticated %}
     <div class="navbar-menu navbar-end">
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">
@@ -63,16 +63,31 @@
       </div>
     </div>
     <div class="navbar-menu navbar-end">
-      <a class="navbar-item" href="{% url 'task_complete' %}">Completed</a>
+      <a class="navbar-item" href="{% url 'task_complete' %}">Tasks Completed</a>
     </div>
     <div class="navbar-menu navbar-end">
       <a class="navbar-item" href="/notifications">Notifications</a>
     </div>
     <div class="navbar-menu navbar-end">
-      <div class="navbar-menu navbar-start">
-        <a class="navbar-item" href="/logout">Logout</a>
-      </div>
+        <span class="navbar-item">Welcome: {{admin.username}}</span>
+        <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
     </div>
+
+{% comment %} If the uadmin(user) is not authentificated and we see the public App {% endcomment %}
+    {% else %}
+    <div class="navbar-menu navbar-start">
+      <a class="navbar-item" href="/">Home</a>
+    </div>
+    <div class="navbar-menu navbar-start">
+      <a class="navbar-item" href="/about">About</a>
+    </div>
+    {% comment %} <div class="navbar-menu navbar-end">
+      <a class="navbar-item" href="{% url 'signup' %}">Sign Up</a>
+    </div> {% endcomment %}
+    <div class="navbar-menu navbar-end">
+        <a class="navbar-item" href="{% url 'login' %}">Log In</a>
+    </div>
+    {% endif %}
   </nav>
 
   <div class="container">
