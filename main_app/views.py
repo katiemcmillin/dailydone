@@ -339,3 +339,17 @@ class UserProfileView(DetailView):
         user_pg = get_object_or_404(UserProfile, pk=self.request.user.pk)
         context["user_profile"] = user_pg
         return context
+
+class UserProfileViewUpdate(UpdateView):
+    model = UserProfile
+    template_name = 'registration/user_profile_update.html'
+    fields = ['bio', 'location', 'interests', 'picture']
+
+    # The form_valid method ensures that the UserProfile instance is saved to the database before get_success_url is called
+    def form_valid(self, form):
+        self.object = form.save()
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        print(self.object.pk)
+        return reverse('user_profile', kwargs={'pk': self.object.pk})

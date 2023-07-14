@@ -18,7 +18,7 @@ p {
 /* Base css */
 
 body {
-    font-family: Aileron, sans-serif;
+    font-family: 'San Francisco', 'Arial', sans-serif;
     background-color: white;
     color: black;
     min-height: 100vh;
@@ -238,7 +238,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 120vh;
+    height: 140vh;
     padding: 2rem;
     background-color: #FFFFFF;
     border-radius: 8px;
@@ -1133,12 +1133,14 @@ p.has-text-centered a.login-link:hover {
 
 /* User Profile Page */
 
-.container_user_profile {
+.container-user-profile {
     width: 400px;
     margin: 0 auto;
     padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     text-align: center;
+    border-radius: 5px;
+    margin-top: 2rem;
 }
 
 .profile-picture {
@@ -1153,11 +1155,123 @@ p.has-text-centered a.login-link:hover {
     margin-bottom: 15px;
 }
 
-.label {
+.label_user_profile {
     font-weight: bold;
     color: #0D3B66;
 }
 
-.button {
+.button_user_profile {
     margin-top: 20px;
+    background-color: #000; 
+    border: none; 
+    color: #fff;
+    padding: 10px 20px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block;
+    font-size: 16px; 
+    transition-duration: 0.4s; 
+    cursor: pointer; 
+    letter-spacing: 2px;
+    border-radius: 5px;
 }
+
+Change background color on mouse-over 
+.button_user_profile:hover {
+    background-color: #444; 
+    color: #fff; 
+}
+
+/* Add a darker grey background color when active  */
+.button_user_profile:active {
+    background-color: #222;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+/* User Update Profile Page */
+
+.title-update-profile{
+    font-size: 32px;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+    margin-left: 1.5rem;
+    color: #0D3B66;
+}
+
+.container-profile-update {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+    border-radius: 5px;
+    margin-top: 2rem;
+}
+
+.form-group-update-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin-bottom: 15px;
+}
+
+.button_save {
+    margin-top: 20px;
+    background-color: #000; 
+    border: none; 
+    color: #fff; 
+    padding: 15px 40px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block;
+    font-size: 16px; 
+    transition-duration: 0.4s; 
+    cursor: pointer; 
+    letter-spacing: 2px;
+    border-radius: 5px;
+    width: 100%; 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); 
+}
+
+.button_save:hover {
+    background-color: #444; 
+    color: #fff; 
+}
+
+.button_save:active {
+    background-color: #222;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.button_back_profile {
+    margin-top: 20px;
+    display: inline-block;
+    color: #000;
+    background-color: #fff; 
+    border: 2px solid #000; 
+    padding: 10px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    border-radius: 5px;
+    width: 100%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    transition-duration: 0.4s;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
+
+.button_back_profile:hover {
+    background-color: #000; 
+    color: #fff; 
+}
+
+.button_back_profile:active {
+    background-color: #222;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+} 
+

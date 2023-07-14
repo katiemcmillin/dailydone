@@ -5,7 +5,6 @@ from . import views
 urlpatterns = [
     path('', views.PublicHome.as_view(), name="public_home"),
     path('private/', views.PrivateHome.as_view(), name='private_home'),
-    # path('', views.Home.as_view(), name="home"),
     path('about/', views.About.as_view(), name='about'),
     path('projects/', views.ProjectList.as_view(), name='project_list'),
     path('projects/new/', views.ProjectCreate.as_view(), name="project_create"),
@@ -22,9 +21,9 @@ urlpatterns = [
     path('tasks/complete/', views.TaskCompletedList.as_view(), name='task_complete'),
     # for the tasks in the project detail page 
     path('tasks/<int:pk>/complete', views.TaskComplete.as_view(), name='task_complete'),
-    # Notifications
-
     # User
     path('accounts/signup/', views.Signup.as_view(), name="signup"),
     path('profile/<int:pk>/', views.UserProfileView.as_view(), name='user_profile'),
+    path('profile/<int:pk>/update', views.UserProfileViewUpdate.as_view(), name='user_profile_update'),
+
 ]

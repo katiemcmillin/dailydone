@@ -4,40 +4,55 @@
 
 
 {% block content %}
-<div class="container_user_profile">
+
+<h2 class="title-update-profile">User Profile</h2>
+
+<div class="container-user-profile">
     <div class="profile-picture">
         {% if user_profile.picture %}
         <img src="{{ user_profile.picture.url }}" alt="Profile Picture">
         {% endif %}
     </div>
     <div class="profile-info">
-        <span class="label">Username</span>
+        <span class="label_user_profile">Username</span>
+        <br>
         <span class="value">{{ user_profile.user.username }}</span>
     </div>
     <div class="profile-info">
-        <span class="label">Email</span>
+        <span class="label_user_profile">Email</span>
+        <br>
         <span class="value">{{ user_profile.user.email }}</span>
     </div>
     <div class="profile-info">
-        <span class="label">First Name</span>
+        <span class="label_user_profile">First Name</span>
+        <br>
         <span class="value">{{ user_profile.user.first_name }}</span>
     </div>
     <div class="profile-info">
-        <span class="label">Last Name</span>
+        <span class="label_user_profile">Last Name</span>
+        <br>
         <span class="value">{{ user_profile.user.last_name }}</span>
     </div>
     <div class="profile-info">
-        <span class="label">Bio</span>
+        <span class="label_user_profile">Bio</span>
+        <br>
         <span class="value">{{ user_profile.bio }}</span>
     </div>
     <div class="profile-info">
-        <span class="label">Location</span>
+        <span class="label_user_profile">Interests</span>
+        <br>
+        <span class="value">{{ user_profile.interests }}</span>
+    </div>
+    <div class="profile-info">
+        <span class="label_user_profile">Location</span>
+        <br>
         <span class="value">{{ user_profile.location }}</span>
     </div>
     <div class="profile-info">
-        <span class="label">Date Joined</span>
+        <span class="label_user_profile">Date Joined</span>
+        <br>
         <span class="value">{{ user_profile.user.date_joined }}</span>
     </div>
-    {% comment %} <a href="{% url 'edit_profile' %}" class="button">Edit Profile</a>  {% endcomment %}
+    <a href="{% url 'user_profile_update' user_profile.pk %}" class="button_user_profile">Edit Profile</a> 
 </div>
 {% endblock %}
