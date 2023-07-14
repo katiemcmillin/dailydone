@@ -1130,3 +1130,34 @@ p.has-text-centered a.login-link {
 p.has-text-centered a.login-link:hover {
     text-decoration: underline;
 }
+
+/* User Profile Page */
+
+.container_user_profile {
+    width: 400px;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    text-align: center;
+}
+
+.profile-picture {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin: 0 auto 20px;
+    overflow: hidden;
+}
+
+.profile-info {
+    margin-bottom: 15px;
+}
+
+.label {
+    font-weight: bold;
+    color: #0D3B66;
+}
+
+.button {
+    margin-top: 20px;
+}

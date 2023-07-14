@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from PIL import Image
 
 # Create your models here.
 
@@ -87,3 +88,14 @@ class TaskComplete(models.Model):
     
     def get_contributors_display(self):
         return ", ".join([contributor.username for contributor in self.task.contributors.all()])
+    
+class UserProfile(models.Model):
+    # We associate it with the user model and as we have some user that are notyet associate we add null=true
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    bio = models.TextField(max_length=4000, blank=True)
+    location = models.CharField(max_length=2000, blank=True)
+    interests = models.CharField(max_length=4000, blank=True)
+    picture = models.ImageField(upload_to='media', blank=True)
+    
+    def __str__(self):
+        return self.user.username

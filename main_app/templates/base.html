@@ -72,8 +72,11 @@
       <a class="navbar-item" href="{% url 'task_complete' %}">Tasks Completed</a>
     </div>
     <div class="navbar-menu navbar-end">
+      <a class="navbar-item" href="{% url 'user_profile' user.pk %}">Your Profile</a>
+  </div>
+    {% comment %} <div class="navbar-menu navbar-end">
       <a class="navbar-item" href="/notifications">Notifications</a>
-    </div>
+    </div> {% endcomment %}
     <div class="navbar-menu navbar-end">
         <span class="navbar-item">Welcome: {{user.username}}</span>
         <a class="navbar-item" href="{% url 'logout' %}">Logout</a>

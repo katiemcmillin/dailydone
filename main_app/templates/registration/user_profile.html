@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}User Profile{% endblock %}
+
+
+{% block content %}
+<div class="container_user_profile">
+    <div class="profile-picture">
+        {% if user_profile.picture %}
+        <img src="{{ user_profile.picture.url }}" alt="Profile Picture">
+        {% endif %}
+    </div>
+    <div class="profile-info">
+        <span class="label">Username</span>
+        <span class="value">{{ user_profile.user.username }}</span>
+    </div>
+    <div class="profile-info">
+        <span class="label">Email</span>
+        <span class="value">{{ user_profile.user.email }}</span>
+    </div>
+    <div class="profile-info">
+        <span class="label">First Name</span>
+        <span class="value">{{ user_profile.user.first_name }}</span>
+    </div>
+    <div class="profile-info">
+        <span class="label">Last Name</span>
+        <span class="value">{{ user_profile.user.last_name }}</span>
+    </div>
+    <div class="profile-info">
+        <span class="label">Bio</span>
+        <span class="value">{{ user_profile.bio }}</span>
+    </div>
+    <div class="profile-info">
+        <span class="label">Location</span>
+        <span class="value">{{ user_profile.location }}</span>
+    </div>
+    <div class="profile-info">
+        <span class="label">Date Joined</span>
+        <span class="value">{{ user_profile.user.date_joined }}</span>
+    </div>
+    {% comment %} <a href="{% url 'edit_profile' %}" class="button">Edit Profile</a>  {% endcomment %}
+</div>
+{% endblock %}

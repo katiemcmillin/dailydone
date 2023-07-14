@@ -26,4 +26,5 @@ urlpatterns = [
 
     # User
     path('accounts/signup/', views.Signup.as_view(), name="signup"),
+    path('profile/<int:pk>/', views.UserProfileView.as_view(), name='user_profile'),
 ]

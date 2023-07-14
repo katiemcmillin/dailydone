@@ -7,11 +7,12 @@ from django.utils.decorators import method_decorator
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
-from .models import Project, Task, TaskComplete
+from .models import Project, Task, TaskComplete, UserProfile
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView
+
 
 class PublicHome(TemplateView):
     template_name = "public_home.html"
@@ -327,3 +328,14 @@ class TaskDelete(DeleteView):
         return response
 
 
+class UserProfileView(DetailView):
+    model = UserProfile
+    template_name = 'registration/user_profile.html'
+
+    def get_context_data(self, *args, **kwargs):
+        users = UserProfile.objects.all() 
+        context = super(UserProfileView, self).get_context_data(*args, **kwargs)
+        # Grabe the user Page from the database and  retrieve the user profile associated with the logged-in user
+        user_pg = get_object_or_404(UserProfile, pk=self.request.user.pk)
+        context["user_profile"] = user_pg
+        return context
