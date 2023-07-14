@@ -34,6 +34,12 @@
             <hr>
             <div class="project-info">
                 <div class="project-importance">
+                    <strong>Admin:</strong> {{ project.get_user_display|title }}
+                </div>
+                <div class="project-importance">
+                    <strong>Contrinutor(s):</strong> {{ project.get_contributors_display|title }}
+                </div>
+                <div class="project-importance">
                     <strong>Importance:</strong> {{ project.get_importance_display|title }}
                 </div>
                 <div class="project-dates">

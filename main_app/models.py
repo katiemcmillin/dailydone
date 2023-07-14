@@ -32,6 +32,14 @@ class Project(models.Model):
 
     def __str__(self):
         return self.title
+    
+    # Displays the name of admin
+    def get_user_display(self):
+        return self.admin.username
+
+    # Displays the name of contributors in a project separated by commas
+    def get_contributors_display(self):
+        return ", ".join([contributor.username for contributor in self.contributors.all()])
 
     class Meta:
         ordering = ['title']
@@ -57,7 +65,7 @@ class Task(models.Model):
 
     def __str__(self):
         return self.title
-
+    
     def save(self, *args, **kwargs):
         # Check if in the save method if admin field is not provided when we save an new task. If the 2 condition are reunited we do the next step
         if not self.pk and not self.admin:
@@ -74,4 +82,8 @@ class TaskComplete(models.Model):
     def __str__(self):
         return self.task.title
     
-
+    def get_user_display(self):
+        return self.task.admin.username
+    
+    def get_contributors_display(self):
+        return ", ".join([contributor.username for contributor in self.task.contributors.all()])

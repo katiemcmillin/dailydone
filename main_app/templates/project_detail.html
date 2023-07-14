@@ -15,6 +15,8 @@
 
     <div class="project-info">
         <div class="project-dates">
+            <p><strong>Admin:</strong> {{ project.get_user_display|title }}</p>
+            <p><strong>Contributor(s):</strong> {{ project.get_contributors_display|title }}</p>
             <p><strong>Start Date:</strong> {{ project.start_date }}</p>
             <p><strong>End Date:</strong> {{ project.due_date }}</p>
         </div>
@@ -70,7 +72,7 @@
                                     <input type="checkbox" class="complete-task-checkbox" data-task-id="{{ task.id }}" onchange="this.form.submit()" {% if task.is_completed %}checked{% endif %}>
                                 </form>
                             </td>
-                            <td><span class="task-title">{{ task.title }}</span></td>
+                            <td><span class="task-title"><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></span></td>
                             <td><span class="task-importance">{{ task.get_importance_display|title }}</span></td>
                             <td><span class="task-due_date">{{ task.due_date }}</span></td>
                             {% comment %} update and delete tasks {% endcomment %}

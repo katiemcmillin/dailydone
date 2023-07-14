@@ -11,6 +11,8 @@
                 <th>Title</th>
                 <th>Importance</th>
                 <th>Due Date</th>
+                <th>Admin</th>
+                <th>Contributor(s)</th>
                 <th>To Do</th>
             </tr>
         </thead>
@@ -20,7 +22,10 @@
                 <td>{{ task.title }}</td>
                 <td>{{ task.importance }}</td>
                 <td>{{ task.due_date }}</td>
+                <td>{{ task.get_user_display|title }}</td>
+                <td>{{ task.get_contributors_display|title }}</td>
                 <td>Done</td>
+
             </tr>
             {% endfor %}
         </tbody>

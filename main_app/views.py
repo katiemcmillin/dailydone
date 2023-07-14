@@ -242,6 +242,14 @@ class TaskDetail(DetailView):
     model = Task
     template_name = 'task_detail.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        task = self.object  
+
+        context['admin'] = task.admin.username
+        context['contributors'] = ", ".join([contributor.username for contributor in task.contributors.all()])
+        return context
+
 @method_decorator(login_required, name='dispatch')
 class TaskCompletedList(ListView):
     model = Task
@@ -300,7 +308,7 @@ class TaskCreate(CreateView):
 class TaskUpdate(UpdateView):
     model = Task
     template_name = 'task_update.html'
-    fields = ['title', 'description', 'is_completed', 'importance', 'project', 'due_date']
+    fields = ['title', 'description', 'is_completed', 'importance', 'project', 'due_date', 'admin', 'contributors']
 
     def get_success_url(self):
         return reverse('task_detail', kwargs={'pk': self.object.pk})
