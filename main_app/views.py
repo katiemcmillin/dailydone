@@ -202,6 +202,8 @@ class TaskCreate(View):
         completion_date = request.POST.get("completion_date")
         due_date = request.POST.get("due_date")
         created_at = request.POST.get("create_at")
+        admin = request.POST.get("admin")
+        contributors = request.POST.get("contributors")
 
         project = Project.objects.get(pk=pk)
         admin = request.user  # Get the current user as the admin (user) of the task
@@ -214,7 +216,8 @@ class TaskCreate(View):
             due_date=due_date,
             created_at=created_at,
             project=project,
-            admin=admin     # Assign the admin (user) to the task
+            admin=admin,    # Assign the admin (user) to the task
+            contributors=contributors
         )
         return redirect('project_detail', pk=pk)
 
@@ -271,7 +274,7 @@ class TaskComplete(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class TaskCreate(CreateView):
     model = Task
-    fields = ['title', 'description', 'is_completed', 'importance','project', 'due_date']
+    fields = ['title', 'description', 'is_completed', 'importance','project', 'due_date', 'admin', 'contributors']
     template_name = 'task_create.html'
     success_url = "/tasks/" 
 

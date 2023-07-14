@@ -839,6 +839,15 @@ body {
     margin-top: 2rem;
 }
 
+.instruction-contributors-create-task {
+    font-size: 9px;
+    color: grey;
+    font-style: italic;
+    margin-top: 0.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
 /* Task Detail PAge */
 
 
