@@ -53,10 +53,19 @@ class Task(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name="tasks")
     contributors = models.ManyToManyField(User, related_name='contributed_tasks', blank=True)
-    admin = models.ForeignKey(User, on_delete=models.CASCADE)
+    admin = models.ForeignKey(User, on_delete=models.CASCADE, default=None)
 
     def __str__(self):
         return self.title
+
+    def save(self, *args, **kwargs):
+        # Check if in the save method if admin field is not provided when we save an new task. If the 2 condition are reunited we do the next step
+        if not self.pk and not self.admin:
+            self.admin = self._get_current_user()  # Set the admin field to the current user using Django's built-in authentication method _get_current_user
+        super().save(*args, **kwargs)  # Call the original save method to save the task with the updated admin field
+
+    def _get_current_user(self):
+        return self.request.user  # Retrieve the currently logged-in user
     
 class TaskComplete(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
@@ -64,3 +73,5 @@ class TaskComplete(models.Model):
 
     def __str__(self):
         return self.task.title
+    
+
