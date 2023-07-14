@@ -41,7 +41,7 @@
 {% comment %} If admin(user) is authentificated) {% endcomment %}
     {% if user.is_authenticated %}
     <div class="navbar-menu navbar-start">
-      <a class="navbar-item" href="/">Home</a>
+      <a class="navbar-item" href="{% url 'private_home' %}">Home</a>
     </div>
     <div class="navbar-menu navbar-start">
       <a class="navbar-item" href="/about">About</a>
@@ -72,11 +72,16 @@
       <a class="navbar-item" href="{% url 'task_complete' %}">Tasks Completed</a>
     </div>
     <div class="navbar-menu navbar-end">
-      <a class="navbar-item" href="{% url 'user_profile' user.pk %}">Your Profile</a>
-  </div>
-    {% comment %} <div class="navbar-menu navbar-end">
-      <a class="navbar-item" href="/notifications">Notifications</a>
-    </div> {% endcomment %}
+      <div class="navbar-item has-dropdown is-hoverable">
+        <a class="navbar-link">
+          Profile
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="{% url 'user_profile' user.pk %}">Your Profile</a>
+          <a class="navbar-item" href="{% url 'user_profile_update' user.pk %}">Update Your Profile</a>
+        </div>
+      </div>
+    </div>
     <div class="navbar-menu navbar-end">
         <span class="navbar-item">Welcome: {{user.username}}</span>
         <a class="navbar-item" href="{% url 'logout' %}">Logout</a>
