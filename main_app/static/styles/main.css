@@ -132,8 +132,8 @@ body {
 /* Screen with a max-width of 768px */
 @media screen and (max-width: 768px) {
     .container-image-homep-pub {
-        width: 100%;
-        height: auto;
+        width: 80%;
+        height: 80%;
     }
 
     .image-homepage-public {

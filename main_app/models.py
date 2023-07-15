@@ -81,6 +81,7 @@ class Task(models.Model):
     def _get_current_user(self):
         return self.request.user  # Retrieve the currently logged-in user
     
+    
 class TaskComplete(models.Model):
     task = models.ForeignKey(Task, on_delete=models.CASCADE)
     completed_at = models.DateTimeField(default=timezone.now)
@@ -94,6 +95,7 @@ class TaskComplete(models.Model):
     def get_contributors_display(self):
         return ", ".join([contributor.username for contributor in self.task.contributors.all()])
     
+
 class UserProfile(models.Model):
     # We associate it with the user model and as we have some user that are notyet associate we add null=true
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
