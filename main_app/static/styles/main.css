@@ -56,37 +56,78 @@ body {
 
 /* Public Homepage */
 
-.home-section {
+
+.home-section.home-public{
     display: flex;
-    align-items: center;
-    justify-content: space-around;
-    margin-top: 2rem;
+    justify-content: space-between;
+    align-items: flex-end;
+    height: 120vh; /* increase the height not to overlap the footer */
+    width: 100%;
+    padding: 2rem;
 }
 
+.home-left-public {
+    flex: 1;
+    padding-right: 2rem;
+}
 
-.home-title {
+.home-public .home-left-title,
+.home-public .home-left-signup-btn {
+    align-self: flex-start;
+}
+
+.home-title-public {
     font-size: 35px;
     font-weight: bold;
-    
+    margin-bottom: 2rem;
+    color: rgb(16, 16, 149);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    margin-bottom: 0.5em; 
+    text-align: center;
 }
 
-.signup-button {
-    background-color: #FA0644;
+.home-left-signup-btn {
+    margin-bottom: 1rem;
+}
+
+.signup-button-public {
+    display: inline-block;
+    background: linear-gradient(to bottom, #fa3747 0%,#fa0644 100%);
     color: white;
-    padding: 8px 16px;
-    border-radius: 5px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 30px;
     text-decoration: none;
     font-weight: bold;
     font-size: 14px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    outline: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
 }
 
-.signup-button:hover {
-    background-color: #C7052C;
+.signup-button-public:hover {
+    background: linear-gradient(to bottom, #c7052c 0%,#b70028 100%);
+    transform: scale(1.05);
 }
 
-.image-homepage {
-    width: 3500px; 
+.home-right {
+    flex: 2;
 }
+
+.container-image-homep-pub {
+    width: 90%;
+    height: 900%;
+}
+
+.image-homepage-public {
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    margin-left: -4rem;
+}
+
+
 
 /* Private Homepage */
 
