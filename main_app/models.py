@@ -29,6 +29,7 @@ class Project(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     admin = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+    is_completed = models.BooleanField(default=False)
     contributors = models.ManyToManyField(User, related_name='contributed_projects', blank=True)
 
     def __str__(self):

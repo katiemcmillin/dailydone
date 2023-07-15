@@ -194,6 +194,26 @@ class ProjectDelete(DeleteView):
     template_name = "project_delete_confirmation.html"
     success_url = "/projects/"
 
+# handle the action of marking a project as completed
+@method_decorator(login_required, name='dispatch')
+class ProjectComplete(View):
+    def post(self, request, *args, **kwargs):
+        project = Project.objects.get(pk=kwargs['pk'], admin=request.user)
+        project.is_completed = True
+        project.save()
+        return redirect('project_list')
+
+# CompletedProjectList is intended to handle a GET request and display the list of completed projects   
+@method_decorator(login_required, name='dispatch')
+class CompletedProjectList(TemplateView):
+    template_name = "completed_project_list.html"
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["completed_projects"] = Project.objects.filter(is_completed=True, admin=self.request.user)
+        return context
+
+
 @method_decorator(login_required, name='dispatch')
 class TaskCreate(View):
     def post(self, request, pk):
@@ -223,6 +243,7 @@ class TaskCreate(View):
             contributors=contributors
         )
         return redirect('project_detail', pk=pk)
+
 
 @method_decorator(login_required, name='dispatch')
 class TaskList(ListView):
@@ -260,6 +281,7 @@ class TaskDetail(DetailView):
             task.is_completed = True
             task.save()
         return redirect('task_detail', pk=task.pk)
+
 
 @method_decorator(login_required, name='dispatch')
 class TaskCompletedList(ListView):

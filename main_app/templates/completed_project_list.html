@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Completed Projects List{% endblock %}
+
+{% block content %}
+    <div class="completed-pjct-container">
+        <h1 class="completed-pjct-title">Completed Projects</h1>
+
+        <a class="completed-pjct-button" href="{% url 'project_list' %}">Go Back to Project List</a>
+
+    {% if completed_projects %}
+        <ul class="completed-pjct-list">
+            {% for project in completed_projects %}
+                <li class="completed-pjct-item">
+                    <h2 class="completed-pjct-name">{{ project.title }}</h2>
+                    <div class="completed-pjct-details">
+                        <p class="completed-pjct-date">
+                            <strong>Due Date:</strong> {{ project.due_date }}
+                        </p>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No completed projects found.</p>
+    {% endif %}
+    </div>
+{% endblock %}

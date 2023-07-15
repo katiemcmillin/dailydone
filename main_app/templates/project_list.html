@@ -3,61 +3,68 @@
 {% block title %}Projects List{% endblock %}
 
 {% block content %}
-    <div class="project-list">
+    <div class="project-completed-container">
         <h1 class="title pt-5">{{header}}</h1>
-    
-    <div class="search-feature">
-        <form class="mb-5" method="get">
-            <div class="field has-addons">
-                <div class="control">
-                    <!--  Our input will search by title of project  -->
-                    <input class="input" type="text" name="title" placeholder="title" />
-                </div>
-                <div class="control">
-                <input class="button custom-button-search" type="submit" value="Search" />
-                </div>
-            </div>
-            <!--  This anchor tag will redirect back to project list without a query param -->
-            <a class="button is-dark" href="{% url 'project_list' %}">Clear Search</a>
-        </form>
-    </div>
 
-    <div class="add-project-btn">
-        <a class="button is-dark" href="{% url 'project_create' %}">Add Project</a>
-    </div>
-
-    {% if projects %}
-        <div class="project-grid">
-            {% for project in projects %}
-            <a href="{% url 'project_detail' project.pk %}" class="project-item">
-            <h2 class="project-title">{{ project.title }}</h2>
-            <hr>
-            <div class="project-info">
-                <div class="project-importance">
-                    <strong>Admin:</strong> {{ project.get_user_display|title }}
+        <div class="search-feature">
+            <form class="mb-5" method="get">
+                <div class="field has-addons">
+                    <div class="control">
+                        <!--  Our input will search by title of project  -->
+                        <input class="input" type="text" name="title" placeholder="title" />
+                    </div>
+                    <div class="control">
+                    <input class="button custom-button-search" type="submit" value="Search" />
+                    </div>
                 </div>
-                <div class="project-importance">
-                    <strong>Contrinutor(s):</strong> {{ project.get_contributors_display|title }}
-                </div>
-                <div class="project-importance">
-                    <strong>Importance:</strong> {{ project.get_importance_display|title }}
-                </div>
-                <div class="project-dates">
-                    <strong>Start Date:</strong> {{ project.start_date }}
-                </div>
-                <div class="project-dates">
-                    <strong>Due Date:</strong> {{ project.due_date }}
-                </div>
-                <div class="project-status">
-                    <strong>Status:</strong> {{ project.get_status_display }}
-                </div>
-            </div>
-            </a>
-            
-            {% endfor %}
+                <!--  This anchor tag will redirect back to project list without a query param -->
+                <a class="button is-dark" href="{% url 'project_list' %}">Clear Search</a>
+            </form>
         </div>
-    {% else %}
-        <p>No projects found.</p>
-    {% endif %}
+
+        <div class="add-project-btn">
+            <a class="button is-dark" href="{% url 'project_create' %}">Add Project</a>
+        </div>
+
+        {% comment %} source: forloop.counter for list https://www.w3schools.com/django/django_tags_for.php {% endcomment %}
+        {% if projects %}
+            <ul class="project-completed-list">
+                {% for project in projects %} 
+                <li class="project-completed-item">
+                    <!-- link for access to project detail page --->
+                    <a href="{% url 'project_detail' project.id %}"> 
+                    <div class="project-completed-header">
+                        <div class="project-completed-number">{{ forloop.counter }}</div>
+                        <h2 class="project-completed-name">{{ project.title }}</h2>
+                    </div>
+                    <div class="project-completed-info">
+                        <div class="project-info-line">
+                            <div><strong>Admin:</strong> {{ project.get_user_display }}</div>
+                            <div><strong>Contributor(s):</strong> {{ project.get_contributors_display }}</div>
+                            <div><strong>Importance:</strong> {{ project.get_importance_display }}</div>
+                        </div>
+                        <div class="project-dates-line">
+                            <div><strong>Start Date:</strong> {{ project.start_date }}</div>
+                            <div><strong>Due Date:</strong> {{ project.due_date }}</div>
+                            <div><strong>Status:</strong> {{ project.get_status_display }}</div>
+                        </div>
+                    </div>
+                    <div class="project-completed-checkbox">
+                        {% if not project.is_completed %}
+                            <form method="post" action="{% url 'project_complete' project.pk %}">
+                                {% csrf_token %}
+                                <input type="checkbox" id="is_completed" name="is_completed" onchange="this.form.submit()">
+                                <label for="is_completed" style="font-size: 15px;"><strong>Mark as Completed</strong></label>
+                            </form>
+                        {% endif %}
+                </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No projects found.</p>
+        {% endif %}
     </div>
 {% endblock %}
+
+
+
