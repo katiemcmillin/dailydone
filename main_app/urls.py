@@ -20,7 +20,7 @@ urlpatterns = [
     path('tasks/<int:pk>/delete', views.TaskDelete.as_view(), name='task_delete'),
     path('tasks/complete/', views.TaskCompletedList.as_view(), name='task_complete'),
     # for the tasks in the project detail page 
-    path('tasks/<int:pk>/complete', views.TaskComplete.as_view(), name='task_complete'),
+    path('tasks/<int:pk>/complete', views.TaskCompleteView.as_view(), name='task_complete'),
     # User
     path('accounts/signup/', views.Signup.as_view(), name="signup"),
     path('profile/<int:pk>/', views.UserProfileView.as_view(), name='user_profile'),

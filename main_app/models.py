@@ -67,6 +67,10 @@ class Task(models.Model):
     def __str__(self):
         return self.title
     
+    # Displays the name of contributors in a task tables separated by commas
+    def get_contributors_display(self):
+        return ", ".join([contributor.username for contributor in self.contributors.all()])
+
     def save(self, *args, **kwargs):
         # Check if in the save method if admin field is not provided when we save an new task. If the 2 condition are reunited we do the next step
         if not self.pk and not self.admin:

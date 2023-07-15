@@ -97,20 +97,27 @@
             <th>Title</th>
             <th>Importance</th>
             <th>Due Date</th>
+            <th>Admin</th>
+            <th>Contributor(s)</th>
             <th>To Do</th>
         </tr>
     </thead>
     <tbody>
-        {% for task in tasks %}
-        {% if task.is_completed %}
+        {% for task in completed_tasks %}
         <tr>
-            <td><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></td>
+            <td>{{ task.title }}</td>
             <td>{{ task.importance }}</td>
             <td>{{ task.due_date }}</td>
+            <td>{{ task.admin.username }}</td>
+            <td>
+                {% for contributor in task.contributors.all %}
+                    {{ contributor.username }}
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
             <td>Done</td>
+        </tr>
     </tr>
-    </tr>
-        {% endif %}
         {% endfor %}
     </tbody>
 </table>

@@ -8,13 +8,13 @@
         <p><span class="detail-heading">Project:</span> <br> {{ task.project.title }}</p>
         <p><span class="detail-heading">Description:</span> <br> {{ task.description }}</p>
         <p><span class="detail-heading">Admin:</span> <br> {{ admin }}</p>
-        <p><span class="detail-heading">Contributors:</span> <br> {{ contributors }}</p>
+        <p><span class="detail-heading">Contributor(s):</span> <br> {{ contributors }}</p>
         <p><span class="detail-heading">Completed:</span> <br> {{ task.is_completed }}</p>
         <p><span class="detail-heading">Level of Importance:</span> <br> {{ task.get_importance_display|title }}</p>
         <p><span class="detail-heading">Due Date:</span> <br> {{ task.due_date }}</p>
         
         <div id="task-actions">
-        {% comment %} <a href="{% url 'task_edit' task.id %}"><i class="fas fa-edit"></i> Edit</a> {% endcomment %}
+        <a href="{% url 'task_update' task.id %}"><i class="fas fa-edit"></i></a>
         <a href="{% url 'task_delete' task.id %}"><i class="fas fa-trash"></i></a>
         </div>
 

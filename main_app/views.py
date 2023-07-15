@@ -12,6 +12,8 @@ from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView
+from django.db.models import Q
+
 
 
 class PublicHome(TemplateView):
@@ -229,14 +231,15 @@ class TaskList(ListView):
     context_object_name = 'tasks'
     ordering = 'due_date'
 
+    # to see task that are not completed yet 'is_completed=False'
     def get_queryset(self):
-        # Filter tasks based on the logged-in user as the admin
-        return Task.objects.filter(admin=self.request.user)
+        return Task.objects.filter(Q(admin=self.request.user) | Q(contributors=self.request.user), is_completed=False)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['completed_tasks'] = Task.objects.filter(is_completed=True)
+        context['completed_tasks'] = Task.objects.filter(Q(admin=self.request.user) | Q(contributors=self.request.user), is_completed=True)
         return context
+
     
 @method_decorator(login_required, name='dispatch')
 class TaskDetail(DetailView):
@@ -257,8 +260,9 @@ class TaskCompletedList(ListView):
     template_name = 'task_completed_list.html'
     context_object_name = 'tasks'  
 
+    # Utilisation of Q objects that allow for complex lookups in Django. Here we check if the logged-in user is either the admin or a contributor with Q object filters filtering tasks that are set as completed. the filter conditions are separated by pipe '|'
     def get_queryset(self):
-        return Task.objects.filter(is_completed=True)
+        return Task.objects.filter(Q(admin=self.request.user) | Q(contributors=self.request.user), is_completed=True)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -266,19 +270,15 @@ class TaskCompletedList(ListView):
         return context
 
 @method_decorator(login_required, name='dispatch')
-class TaskComplete(TemplateView):
+class TaskCompleteView(TemplateView):
     template_name = "task_complete.html"
 
     def post(self, request, pk):
         task = get_object_or_404(Task, pk=pk)
-        TaskComplete.objects.create(task=task)
-        return redirect('task_list')
-    
-    def task_complete(request):
-        completed_tasks = Task.objects.filter(is_completed=True)
-        context = {'completed_tasks': completed_tasks}
+        task.is_completed = not task.is_completed  
 
-        return render(request, 'task_complete.html', context)
+        task.save()
+        return redirect('task_list')
 
 @method_decorator(login_required, name='dispatch')
 class TaskCreate(CreateView):

@@ -26,9 +26,11 @@
 </head>
 
 <body>
+  {% comment %} If admin(user) is authentificated) {% endcomment %}
+      {% if user.is_authenticated %}
   <nav class="navbar is-black" role="navigation" aria-label="main navigation">
     <div class="navbar-brand">
-      <a class="navbar-item" href="/">
+      <a class="navbar-item" href="{% url 'private_home' %}">
         <img class="navbar-logo" src="{% static 'main_app/images/DailyDone_logo.png' %}" alt="DailyDone Logo" style="width: 50px; height: 60px;">
       </a>
       <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
@@ -38,8 +40,6 @@
       </a>
     </div>
     
-{% comment %} If admin(user) is authentificated) {% endcomment %}
-    {% if user.is_authenticated %}
     <div class="navbar-menu navbar-start">
       <a class="navbar-item" href="{% url 'private_home' %}">Home</a>
     </div>
@@ -89,6 +89,18 @@
 
 {% comment %} If the uadmin(user) is not authentificated and we see the public App {% endcomment %}
     {% else %}
+    <nav class="navbar is-black" role="navigation" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item" href="/">
+          <img class="navbar-logo" src="{% static 'main_app/images/DailyDone_logo.png' %}" alt="DailyDone Logo" style="width: 50px; height: 60px;">
+        </a>
+        <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+          <span aria-hidden="true"></span>
+        </a>
+      </div>
+
     <div class="navbar-menu navbar-start">
       <a class="navbar-item" href="/">Home</a>
     </div>
