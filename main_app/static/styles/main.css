@@ -294,7 +294,7 @@ body {
     width: 90%;
     border-radius: 0 0 5px 5px;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-    transform: translateY(30%); /* move up and down the white rectangular */
+    transform: translateY(10%); /* move up and down the white rectangular */
 }
 
 .feature-title {
