@@ -35,6 +35,16 @@ Key Features:
 ## Deployed App
 [] (link)
 
+
+## Get Started
+
+You can use the following for testing or create your own:
+
+- **Username**: Tasty
+- **Password:**: Testagain@
+
+Remember to keep your personal details safe and secure when using DailyDone for your personal projects and tasks.
+
 ## Wireframes
 
 <img width="1386" alt="Public_Homepage" src="https://github.com/DoloresCode/dailydone/assets/117631390/c80b94f4-2a98-4688-bcd0-4ce66b2ee628">
