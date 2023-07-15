@@ -9,7 +9,13 @@
         <p><span class="detail-heading">Description:</span> <br> {{ task.description }}</p>
         <p><span class="detail-heading">Admin:</span> <br> {{ admin }}</p>
         <p><span class="detail-heading">Contributor(s):</span> <br> {{ contributors }}</p>
-        <p><span class="detail-heading">Completed:</span> <br> {{ task.is_completed }}</p>
+
+        <form method="post">
+            {% csrf_token %}
+            <input type="checkbox" name="is_completed" {% if task.is_completed %}checked{% endif %} onchange="this.form.submit()">
+            <span class="detail-heading">Completed</span>
+        </form>
+        
         <p><span class="detail-heading">Level of Importance:</span> <br> {{ task.get_importance_display|title }}</p>
         <p><span class="detail-heading">Due Date:</span> <br> {{ task.due_date }}</p>
         

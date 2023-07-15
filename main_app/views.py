@@ -253,6 +253,13 @@ class TaskDetail(DetailView):
         context['admin'] = task.admin.username
         context['contributors'] = ", ".join([contributor.username for contributor in task.contributors.all()])
         return context
+    
+    def post(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs['pk'])
+        if 'is_completed' in request.POST:
+            task.is_completed = True
+            task.save()
+        return redirect('task_detail', pk=task.pk)
 
 @method_decorator(login_required, name='dispatch')
 class TaskCompletedList(ListView):
@@ -270,7 +277,7 @@ class TaskCompletedList(ListView):
         return context
 
 @method_decorator(login_required, name='dispatch')
-class TaskCompleteView(TemplateView):
+class TaskCompleteView(View):
     template_name = "task_complete.html"
 
     def post(self, request, pk):

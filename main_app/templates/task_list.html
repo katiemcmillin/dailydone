@@ -24,6 +24,8 @@
             <th>Importance</th>
             <th>Due Date</th>
             <th>Completion Status</th>
+            <th>Admin</th>
+            <th>Contributor(s)</th>
             <th>To Do</th>
             <th>Action</th>
         </tr>
@@ -39,7 +41,21 @@
             <td class="{% if task.is_completed %}task-completed{% else %}task-not-completed{% endif %}">
                 {{ task.is_completed }}
             </td>
-            <td class="task-todo">{% if not task.is_completed %}<input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()"> {% endif %}</td>
+            <td>{{ task.admin.username }}</td>
+            <td>
+                {% for contributor in task.contributors.all %}
+                    {{ contributor.username }}
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td class="task-todo">
+                {% if not task.is_completed %}
+                    <form method="post" action="{% url 'task_complete' task.pk %}">
+                        {% csrf_token %}
+                        <input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()">
+                    </form>
+                {% endif %}
+            </td>
             <td>
                 <a href="{% url 'task_update' task.pk %}" class="button update-button">
                     <i class="fas fa-edit"></i> 
@@ -53,6 +69,7 @@
     </tbody>
 </table>
 
+
 <h2 class="sub-title-tasks-pg-1">Tasks To Do</h2>
 
 <table class="tasks-to-do-table">
@@ -61,6 +78,8 @@
             <th>Title</th>
             <th>Importance</th>
             <th>Due Date</th>
+            <th>Admin</th>
+            <th>Contributor(s)</th>
             <th>To Do</th>
             <th>Action</th>
         </tr>
@@ -72,7 +91,21 @@
             <td><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></td>
             <td>{{ task.importance }}</td>
             <td>{{ task.due_date }}</td>
-            <td class="task-todo">{% if not task.is_completed %}<input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()"> {% endif %}</td>
+            <td>{{ task.admin.username }}</td>
+            <td>
+                {% for contributor in task.contributors.all %}
+                    {{ contributor.username }}
+                    {% if not forloop.last %}, {% endif %}
+                {% endfor %}
+            </td>
+            <td class="task-todo">
+                {% if not task.is_completed %}
+                    <form method="post" action="{% url 'task_complete' task.pk %}">
+                        {% csrf_token %}
+                        <input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()">
+                    </form>
+                {% endif %}
+            </td>
             <td>
                 <a href="{% url 'task_update' task.pk %}" class="button update-button">
                     <i class="fas fa-edit"></i> 
@@ -82,11 +115,11 @@
                 </a>
             </td>
         </tr>
-        </tr>
         {% endif %}
         {% endfor %}
     </tbody>
 </table>
+
 
 
 <h2 class="sub-title-tasks-pg-2">Completed Tasks</h2>
@@ -105,7 +138,7 @@
     <tbody>
         {% for task in completed_tasks %}
         <tr>
-            <td>{{ task.title }}</td>
+            <td><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></td>
             <td>{{ task.importance }}</td>
             <td>{{ task.due_date }}</td>
             <td>{{ task.admin.username }}</td>

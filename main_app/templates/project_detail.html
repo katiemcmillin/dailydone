@@ -67,33 +67,35 @@
                 </thead>
                 <tbody>
                     {% for task in project.tasks.all %}
-                        <tr>
-                            <td>
-                                <form action="{% url 'task_complete' task.id %}" method="post">
-                                    {% csrf_token %}
-                                    <input type="checkbox" class="complete-task-checkbox" data-task-id="{{ task.id }}" onchange="this.form.submit()" {% if task.is_completed %}checked{% endif %}>
-                                </form>
-                            </td>
-                            <td><span class="task-title"><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></span></td>
-                            <td><span class="task-importance">{{ task.get_importance_display|title }}</span></td>
-                            <td><span class="task-due_date">{{ task.due_date }}</span></td>
-                            <td><span class="task-due_date">{{ task.admin.username }}</span></td>
-                            <td><span class="task-due_date">{{ task.get_contributors_display }}</span></td>
-                            {% comment %} update and delete tasks {% endcomment %}
-                            <td>
-                                <a href="{% url 'task_update' task.pk %}" class="button is-info update-icon">
-                                    <span class="icon">
-                                        <i class="fas fa-edit"></i>
-                                    </span>
-                                </a>
-                                <a href="{% url 'task_delete' task.pk %}" class="button is-danger delete-icon">
-                                    <span class="icon">
-                                        <i class="fas fa-times"></i>
-                                    </span>
-                                </a>
-                            </td>
-                            {% comment %} end  {% endcomment %}
-                        </tr>
+                        {% if not task.is_completed %}
+                            <tr>
+                                <td>
+                                    <form action="{% url 'task_complete' task.id %}" method="post">
+                                        {% csrf_token %}
+                                        <input type="checkbox" class="complete-task-checkbox" data-task-id="{{ task.id }}" onchange="this.form.submit()" {% if task.is_completed %}checked{% endif %}>
+                                    </form>
+                                </td>
+                                <td><span class="task-title"><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></span></td>
+                                <td><span class="task-importance">{{ task.get_importance_display|title }}</span></td>
+                                <td><span class="task-due_date">{{ task.due_date }}</span></td>
+                                <td><span class="task-due_date">{{ task.admin.username }}</span></td>
+                                <td><span class="task-due_date">{{ task.get_contributors_display }}</span></td>
+                                {% comment %} update and delete tasks {% endcomment %}
+                                <td>
+                                    <a href="{% url 'task_update' task.pk %}" class="button is-info update-icon">
+                                        <span class="icon">
+                                            <i class="fas fa-edit"></i>
+                                        </span>
+                                    </a>
+                                    <a href="{% url 'task_delete' task.pk %}" class="button is-danger delete-icon">
+                                        <span class="icon">
+                                            <i class="fas fa-times"></i>
+                                        </span>
+                                    </a>
+                                </td>
+                                {% comment %} end  {% endcomment %}
+                            </tr>
+                        {% endif %}
                     {% endfor %}
                 </tbody>
             </table>
