@@ -40,8 +40,8 @@ Key Features:
 
 You can use the following for testing or create your own:
 
-- **Username**: Tasty
-- **Password:**: Testagain@
+- **Username**: Tastya
+- **Password:**: 3?SeKretly2Z!@
 
 Remember to keep your personal details safe and secure when using DailyDone for your personal projects and tasks.
 

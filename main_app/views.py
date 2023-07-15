@@ -143,37 +143,6 @@ class CompletedProjectList(TemplateView):
 
 
 @method_decorator(login_required, name='dispatch')
-class TaskCreate(View):
-    def post(self, request, pk):
-        title = request.POST.get("title")
-        description = request.POST.get("description")
-        # look if is_completed's box is checked. if yes, the value will be True otherwise it will be false
-        is_completed = request.POST.get("is_completed") == "on"  
-        importance = request.POST.get("importance")
-        completion_date = request.POST.get("completion_date")
-        due_date = request.POST.get("due_date")
-        created_at = request.POST.get("create_at")
-        admin = request.POST.get("admin")
-        contributors = request.POST.get("contributors")
-
-        project = Project.objects.get(pk=pk)
-        admin = request.user  # Get the current user as the admin (user) of the task
-        Task.objects.create(
-            title=title,
-            description=description,
-            is_completed=is_completed,
-            importance=importance,
-            completion_date=completion_date,
-            due_date=due_date,
-            created_at=created_at,
-            project=project,
-            admin=admin,    # Assign the admin (user) to the task
-            contributors=contributors
-        )
-        return redirect('project_detail', pk=pk)
-
-
-@method_decorator(login_required, name='dispatch')
 class TaskList(ListView):
     model = Task
     template_name = 'task_list.html'
@@ -237,10 +206,12 @@ class TaskCompleteView(View):
         task.save()
         return redirect('task_list')
 
+
+# This view is for creating a Task with multiple associated projects
 @method_decorator(login_required, name='dispatch')
-class TaskCreate(CreateView):
+class TaskCreateWithProjects(CreateView):
     model = Task
-    fields = ['title', 'description', 'is_completed', 'importance','project', 'due_date', 'admin', 'contributors']
+    fields = ['title', 'description', 'is_completed', 'importance','project', 'due_date', 'contributors']
     template_name = 'task_create.html'
     success_url = "/tasks/" 
 
@@ -250,17 +221,29 @@ class TaskCreate(CreateView):
         context['projects'] = Project.objects.all()
         return context
     
-    def post(self, request, *args, **kwargs):
-        form = self.get_form()
-        if form.is_valid():
-            task = form.save()  # save the new task instance
-            projects = request.POST.getlist('projects')  # I get the list of selected project ids
-            for project_id in projects:
-                project = Project.objects.get(pk=project_id)
-                task.projects.add(project)  # I add each selected project to the task
-            return redirect(self.success_url)
-        else:
-            return self.form_invalid(form)
+    def form_valid(self, form):
+        task = form.save(commit=False)
+        task.admin = self.request.user  # assign the current user as admin automatically
+        task.save()
+        form.save_m2m()  # necessary to save MToM relationship
+        return redirect(self.success_url)
+
+
+# This view is for creating a Task within a specific project
+@method_decorator(login_required, name='dispatch')
+class TaskCreateWithProject(CreateView):
+    model = Task
+    template_name = 'task_create.html'
+    fields = ['title', 'description', 'is_completed', 'importance', 'due_date', 'contributors']
+    
+    def form_valid(self, form):
+        form.instance.admin = self.request.user  # Set the current user as the admin of the task
+        form.instance.project = get_object_or_404(Project, pk=self.kwargs['pk'])  # set the project
+        return super().form_valid(form)
+
+    def get_success_url(self):
+        return reverse('project_detail', kwargs={'pk': self.object.project.pk}) 
+
 
 
 @method_decorator(login_required, name='dispatch')       

@@ -15,9 +15,9 @@ urlpatterns = [
     path('projects/<int:pk>/complete', views.ProjectComplete.as_view(), name='project_complete'),
     path('completed_projects/', views.CompletedProjectList.as_view(), name='completed_project_list'),
     path('tasks/', views.TaskList.as_view(), name='task_list'),
-    path('tasks/new/', views.TaskCreate.as_view(), name='task_create'),
+    path('tasks/new/', views.TaskCreateWithProjects.as_view(), name='task_create'),
     # add, detail, update and remove task
-    path('projects/<int:pk>/tasks/new/', views.TaskCreate.as_view(), name='project_task_create'),
+    path('projects/<int:pk>/tasks/new/', views.TaskCreateWithProject.as_view(), name='project_task_create'),
     path('tasks/<int:pk>/', views.TaskDetail.as_view(), name='task_detail'),
     path('tasks/<int:pk>/update', views.TaskUpdate.as_view(), name='task_update'),
     path('tasks/<int:pk>/delete', views.TaskDelete.as_view(), name='task_delete'),
