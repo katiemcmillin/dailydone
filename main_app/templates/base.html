@@ -67,11 +67,9 @@
         <div class="navbar-dropdown">
           <a class="navbar-item" href="/tasks">Tasks Dashboard</a>
           <a class="navbar-item" href="/tasks/new">Create New Task</a>
+          <a class="navbar-item" href="{% url 'task_complete' %}">View Tasks Completed</a>
         </div>
       </div>
-    </div>
-    <div class="navbar-menu navbar-end">
-      <a class="navbar-item" href="{% url 'task_complete' %}">Tasks Completed</a>
     </div>
     <div class="navbar-menu navbar-end">
       <div class="navbar-item has-dropdown is-hoverable">

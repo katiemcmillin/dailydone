@@ -573,6 +573,12 @@ body {
     margin-left: 2rem;
     margin-bottom: 0.5rem;
 }
+
+.completed-label {
+    font-size: 12px;
+    font-weight: bold;
+}
+
 /* Detail Page - Forr Small Screen */
 @media (max-width: 768px) {
 .project-detail {

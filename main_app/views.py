@@ -143,12 +143,12 @@ class ProjectList(TemplateView):
         title = self.request.GET.get("title")
         # If a query exists we will filter by title 
         if title != None:
-            # .filter is the sql WHERE statement and title__icontains is doing a search for any title that contains the query param and link to the admin who is links to the project
-            context["projects"] = Project.objects.filter(title__icontains=title, admin=self.request.user)
+            # .filter is the sql WHERE statement and title__icontains is doing a search for any title that contains the query param and link to the admin who is links to the project and keep only the project that are NOT completed
+            context["projects"] = Project.objects.filter(title__icontains=title, admin=self.request.user, is_completed=False)
             # We add a header context that includes the search param
             context["header"] = f"Searching for {title}"
         else:
-            context["projects"] = Project.objects.filter(admin=self.request.user)
+            context["projects"] = Project.objects.filter(admin=self.request.user, is_completed=False)
             # default header for not searching 
             context["header"] = "List Of Projects"
         return context

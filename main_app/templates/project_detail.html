@@ -24,6 +24,13 @@
             <p><strong>Importance:</strong> {{ project.get_importance_display|title }}</p>
             <p><strong>Status:</strong> {{ project.get_status_display|title }}</p>
         </div>
+        <div class="project-completion">
+            <form method="POST" action="{% url 'project_complete' project.pk %}">
+                {% csrf_token %}
+                <input type="checkbox" id="completed" name="completed" onchange="this.form.submit()">
+                <label for="completed" class="completed-label">Mark as Completed</label>
+            </form>
+        </div>
     </div>
 
     <div class="buttons-upt-dlt">

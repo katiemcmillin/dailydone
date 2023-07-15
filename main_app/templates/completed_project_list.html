@@ -12,7 +12,9 @@
         <ul class="completed-pjct-list">
             {% for project in completed_projects %}
                 <li class="completed-pjct-item">
-                    <h2 class="completed-pjct-name">{{ project.title }}</h2>
+                    <h2 class="completed-pjct-name">
+                        <a href="{% url 'project_detail' project.id %}">{{ project.title }}</a>
+                    </h2>
                     <div class="completed-pjct-details">
                         <p class="completed-pjct-date">
                             <strong>Due Date:</strong> {{ project.due_date }}
