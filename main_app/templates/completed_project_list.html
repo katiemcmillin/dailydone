@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="completed-pjct-container">
-        <h1 class="completed-pjct-title">Completed Projects</h1>
+        <h1 class="completed-pjct-title">Completed Projects ({{ completed_projects|length }})</h1>
 
         <a class="completed-pjct-button" href="{% url 'project_list' %}">Go Back to Project List</a>
 

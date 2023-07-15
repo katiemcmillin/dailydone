@@ -181,7 +181,7 @@ class ProjectDetail(DetailView):
 @method_decorator(login_required, name='dispatch')
 class ProjectUpdate(UpdateView):
     model = Project
-    fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status', 'admin', 'contributors']
+    fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status', 'admin', 'contributors', 'is_completed']
     template_name = "project_update.html"
 
     def get_success_url(self):

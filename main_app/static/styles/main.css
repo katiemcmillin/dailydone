@@ -840,6 +840,10 @@ body {
     margin-top: 2rem;
 }
 
+.sub-title-tasks-pg-1, .sub-title-tasks-pg-2 {
+    padding: 0.5em 0;
+}
+
 .create-task-button {
     background-color: #063854 !important;
 }

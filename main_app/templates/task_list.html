@@ -17,6 +17,8 @@
     <a href="{% url 'project_list' %}">View Projects</a>
 </div>
 
+<h2 class="sub-title-tasks-pg-1">Tasks To Do ({{ tasks|length }})</h2>
+
 <table class="task-table">
     <thead>
         <tr>
@@ -70,7 +72,7 @@
 </table>
 
 
-<h2 class="sub-title-tasks-pg-1">Tasks To Do</h2>
+<h2 class="sub-title-tasks-pg-1">Tasks To Do ({{ tasks|length }})</h2>
 
 <table class="tasks-to-do-table">
     <thead>
@@ -121,8 +123,7 @@
 </table>
 
 
-
-<h2 class="sub-title-tasks-pg-2">Completed Tasks</h2>
+<h2 class="sub-title-tasks-pg-2">Completed Tasks ({{ completed_tasks|length }})</h2>
 
 <table class="completed-tasks-table">
     <thead>
