@@ -6,6 +6,7 @@ urlpatterns = [
     path('', views.PublicHome.as_view(), name="public_home"),
     path('private/', views.PrivateHome.as_view(), name='private_home'),
     path('about/', views.About.as_view(), name='about'),
+    path('dashboard/', views.Dashboard.as_view(), name='dashboard'),
     path('projects/', views.ProjectList.as_view(), name='project_list'),
     path('projects/new/', views.ProjectCreate.as_view(), name="project_create"),
     path('projects/<int:pk>/', views.ProjectDetail.as_view(), name='project_detail'),

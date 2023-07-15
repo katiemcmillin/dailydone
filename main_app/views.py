@@ -13,6 +13,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView
 from django.db.models import Q
+from datetime import date, datetime
 
 
 
@@ -45,79 +46,6 @@ class Signup(View):
 class About(TemplateView):
     template_name = "about.html"
 
-# class Project :
-#     def __init__(self, title, description, start_date, due_date, importance, status, created_at, updated_at):
-#         self.title = title
-#         self.idescription = description
-#         self.start_date = start_date
-#         self.due_date = due_date
-#         self.importance = importance
-#         self.status = status
-#         self.created_at = created_at
-#         self.updated_at = updated_at
-
-# projects = [
-#     Project(
-#         "Productivity Tracker",
-#         "Develop a productivity tracking application that helps users monitor and optimize their daily tasks. The app will include features such as task management, time tracking, goal setting, and performance analytics.",
-#         "2022-01-01",
-#         "2022-02-01",
-#         "high",
-#         "in_progress",
-#         "2022-01-01 00:00:00",
-#         "2022-01-01 00:00:00"
-#     ),
-#     Project(
-#         "E-commerce Website Redesign",
-#         "Redesign an existing e-commerce website to enhance the user experience, improve the visual aesthetics, and optimize the overall performance. The redesign will involve updating the UI/UX, implementing responsive design, and integrating new payment gateways.",
-#         "2022-02-01",
-#         "2022-03-01",
-#         "medium",
-#         "on_hold",
-#         "2022-02-01 00:00:00",
-#         "2022-02-01 00:00:00"
-#     ),
-#     Project(
-#     "Website Content Migration",
-#     "Migrate website content from an old platform to a new CMS...",
-#     "2022-03-15",
-#     "2022-04-15",
-#     "high",
-#     "in_progress",
-#     "2022-03-01 00:00:00",
-#     "2022-03-01 00:00:00"
-# ),
-# Project(
-#     "Social Media Marketing Campaign",
-#     "Plan and execute a social media marketing campaign...",
-#     "2022-05-01",
-#     "2022-06-30",
-#     "medium",
-#     "in_progress",
-#     "2022-05-01 00:00:00",
-#     "2022-05-01 00:00:00"
-# ),
-# Project(
-#     "Mobile App UI/UX Design",
-#     "Design user interfaces and experiences for a mobile application...",
-#     "2022-07-01",
-#     "2022-08-15",
-#     "low",
-#     "pending",
-#     "2022-07-01 00:00:00",
-#     "2022-07-01 00:00:00"
-# ),
-# Project(
-#     "Data Migration and Integration",
-#     "Migrate and integrate data from multiple sources into a unified system...",
-#     "2022-09-01",
-#     "2022-10-31",
-#     "high",
-#     "on_hold",
-#     "2022-09-01 00:00:00",
-#     "2022-09-01 00:00:00"
-# ),
-# ]
 
 @method_decorator(login_required, name='dispatch')
 class ProjectCreate(CreateView):
@@ -334,6 +262,7 @@ class TaskCreate(CreateView):
         else:
             return self.form_invalid(form)
 
+
 @method_decorator(login_required, name='dispatch')       
 class TaskUpdate(UpdateView):
     model = Task
@@ -342,6 +271,7 @@ class TaskUpdate(UpdateView):
 
     def get_success_url(self):
         return reverse('task_detail', kwargs={'pk': self.object.pk})
+
 
 @method_decorator(login_required, name='dispatch')
 class TaskDelete(DeleteView):
@@ -356,7 +286,7 @@ class TaskDelete(DeleteView):
         response = super().delete(request, *args, **kwargs)
         return response
 
-
+@method_decorator(login_required, name='dispatch')
 class UserProfileView(DetailView):
     model = UserProfile
     template_name = 'registration/user_profile.html'
@@ -382,3 +312,37 @@ class UserProfileViewUpdate(UpdateView):
     def get_success_url(self):
         print(self.object.pk)
         return reverse('user_profile', kwargs={'pk': self.object.pk})
+
+
+@method_decorator(login_required, name='dispatch')
+class Dashboard(View):
+    template_name = 'dashboard.html'
+
+    def get(self, request):
+        # Fetching all tasks and projects where the logged-in user is the admin and or collaborator
+        tasks = Task.objects.filter(Q(admin=request.user) | Q(contributors=request.user))
+        projects = Project.objects.filter(Q(admin=request.user) | Q(contributors=request.user))
+
+        # Fetching tasks due today
+        tasks_today = tasks.filter(due_date=date.today())
+        
+        # Fetching upcoming tasks
+        tasks_upcoming = tasks.filter(due_date__gt=date.today())
+
+        # Fetching the projects due today
+        projects_today = projects.filter(due_date=date.today())
+
+        # Fetching remaining tasks and projects
+        tasks_remaining = tasks.filter(is_completed=False)
+        projects_remaining = projects.filter(is_completed=False)
+
+        context = {
+            'tasks_today': tasks_today,
+            'tasks_upcoming': tasks_upcoming,
+            'projects_today': projects_today,
+            'tasks_remaining': tasks_remaining,
+            'projects_remaining': projects_remaining,
+            'current_date': datetime.now(), 
+        }
+        
+        return render(request, self.template_name, context)

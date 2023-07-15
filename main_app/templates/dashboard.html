@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="dashboard-container">
+        <div class="admin-greeting-dashb">Hello, {{ request.user.username }}</div>
+
+        <div class="tasks-dashb-container">
+            <h1 class="dashb-h1">{{ current_date|date:"F j, Y" }}</h1>
+            <h2 class="dashb-h2">TASKS</h2>
+            <p class="dashb-p total">Total <span>{{ tasks_remaining.count }}</span></p>
+            <p class="dashb-p today">Today <span>{{ tasks_today.count }}</span></p>
+            <p class="dashb-p upcoming">Upcoming <span>{{ tasks_upcoming.count }}</span></p>
+            <a href="{% url 'task_list' %}" class="arrow-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+            </svg>
+            </a>
+        </div>
+
+        <div class="project-dashb-container">
+            <h2 class="dashb-h2">PROJECTS' LIST</h2>
+            <p class="dashb-p total">Total <span>{{ projects_remaining.count }}</span></p>
+            <p class="dashb-p today">Today <span>{{ projects_today.count }}</span></p>
+            <a href="{% url 'project_list' %}" class="arrow-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+            </svg>
+            </a>
+        </div>
+
+        <div class="profile-dashb-container">
+            <a href="{% url 'user_profile' request.user.id %}" class="arrow-icon black">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+            </svg>
+            </a>
+        </div>
+    </div>
+{% endblock %}
+
+
+{% comment %} source icons: https://icons.getbootstrap.com/icons/calendar3/ {% endcomment %}

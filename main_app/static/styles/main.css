@@ -36,7 +36,7 @@ body {
     width: 100%;
     font-size: 14px;
     margin-top: 4rem;
-    position: sticky;
+   
     
 }
 
@@ -1484,4 +1484,110 @@ Change background color on mouse-over
 
 .completed-pjct-details {
     color: #868e96;
+}
+
+/* Dashboard Page */
+
+.dashboard-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 2fr 2fr 1fr;
+    gap: 1em;
+    padding: 1em;
+    height: 80vh;
+    margin-top: 2rem;
+    
+}
+
+.admin-greeting-dashb {
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    background-color: #AA02FF;
+    color: white;
+    text-align: center;
+    font-size: 2em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+}
+
+.tasks-dashb-container {
+    grid-column: 1 / 2;
+    grid-row: 2 / 3;
+    background-color: #FA0644;
+    color: white;
+    padding: 1em;
+    position: relative;
+    border-radius: 10px;
+
+}
+
+.project-dashb-container {
+    grid-column: 1 / 2;
+    grid-row: 3 / 4;
+    background-color: #38B6FF;
+    color: white;
+    padding: 1em;
+    position: relative;
+    border-radius: 10px;
+}
+
+.profile-dashb-container {
+    grid-column: 2 / 3;
+    grid-row: 1 / 4;
+    background-image: url("/static/main_app/images/dashboard_profile_img.jpeg");
+    background-size: cover;
+    color: white;
+    border-radius: 10px;
+    position: relative;
+}
+
+.dashb-h1 {
+    font-size: 2em;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    color: white;
+    text-transform: uppercase;
+}
+
+.dashb-h2 {
+    font-size: 1.5em;
+    text-align: left;
+    margin-bottom: 1.2rem;
+    color: white;
+    text-transform: uppercase;
+}
+
+.dashb-p {
+    font-size: 1em;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    
+}
+
+.profile-dashb-container a {
+    position: absolute;
+    top: 30px; /* move arrow */
+    right: 30px; /* move arrow */
+    color: black;
+    transform: scale(1.5);
+    
+}
+
+.project-dashb-container svg {
+    position: absolute;
+    color: white;
+    transform: scale(1.5);
+    bottom: 100px; /* move arrow */
+    right: 30px;/* move arrow */
+}
+
+.tasks-dashb-container svg {
+    color: white;
+    transform: scale(1.5);
+    position: absolute;
+    bottom: 200px; /* move arrow */
+    right: 30px; /* move arrow */
 }
