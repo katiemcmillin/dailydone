@@ -1,12 +1,15 @@
 from django.db import models
 from django.utils import timezone
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from PIL import Image
 
 # Create your models here.
 
 class Project(models.Model):
     STATUS_CHOICES = [
+        ('not_started', 'Not Started'),
         ('pending', 'Pending'),
         ('in_progress', 'In Progress'),
         ('completed', 'Completed'),
@@ -106,3 +109,17 @@ class UserProfile(models.Model):
     
     def __str__(self):
         return self.user.username
+    
+# It's a receiver function that will automatically create a UserProfile when a new User is created
+@receiver(post_save, sender=User)
+def create_user_profile(sender, instance, created, **kwargs):
+    if created:
+        UserProfile.objects.create(user=instance)
+
+# Receiver function that will automatically save the UserProfile instance when the User instance is saved
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.userprofile.save()
+
+# Post save signal django notion example
+# Part of source: https://studygyaan.com/django/how-to-use-and-create-django-signals

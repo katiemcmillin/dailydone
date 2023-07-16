@@ -14,6 +14,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView
 from django.db.models import Q
 from datetime import date, datetime
+from django.forms import ModelForm
 
 
 
@@ -177,7 +178,7 @@ class TaskDetail(DetailView):
         if 'is_completed' in request.POST:
             task.is_completed = True
             task.save()
-        return redirect('task_detail', pk=task.pk)
+        return redirect('task_list')
 
 
 @method_decorator(login_required, name='dispatch')
@@ -268,6 +269,8 @@ class TaskDelete(DeleteView):
         self.object = self.get_object()
         response = super().delete(request, *args, **kwargs)
         return response
+    
+
 
 @method_decorator(login_required, name='dispatch')
 class UserProfileView(DetailView):
@@ -282,20 +285,27 @@ class UserProfileView(DetailView):
         context["user_profile"] = user_pg
         return context
 
+
+#  To create a form 
+class UserProfileForm(ModelForm):
+    class Meta:
+        model = UserProfile
+        fields = ['bio', 'location', 'interests', 'picture']
+
+
+# Use the form here 
+@method_decorator(login_required, name='dispatch')        
 class UserProfileViewUpdate(UpdateView):
     model = UserProfile
+    form_class = UserProfileForm
     template_name = 'registration/user_profile_update.html'
-    fields = ['bio', 'location', 'interests', 'picture']
 
-    # The form_valid method ensures that the UserProfile instance is saved to the database before get_success_url is called
-    def form_valid(self, form):
-        self.object = form.save()
-        return super().form_valid(form)
+    def get_object(self, queryset=None):
+        return self.request.user.userprofile
 
     def get_success_url(self):
-        print(self.object.pk)
-        return reverse('user_profile', kwargs={'pk': self.object.pk})
-
+        return reverse('user_profile', kwargs={'pk': self.request.user.pk})
+    
 
 @method_decorator(login_required, name='dispatch')
 class Dashboard(View):

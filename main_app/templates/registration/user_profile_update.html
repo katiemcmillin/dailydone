@@ -3,16 +3,14 @@
 {% block title %}Update Profile{% endblock %}
 
 {% block content %}
-
 <h2 class="title-update-profile">Update Profile</h2>
-
 <div class="container-profile-update">
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group-update-profile">
             {{ form.as_p }}
         </div>
-        <button type="submit_update_profile" class="button_save">Save</button>
+        <button type="submit" class="button_save_update_profile">Save</button> 
     </form>
     <a class="button_back_profile" href="{% url 'user_profile' user.pk %}">Back to Profile</a>
 </div>
