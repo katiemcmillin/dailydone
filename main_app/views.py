@@ -3,7 +3,7 @@ from django.contrib.auth.forms import UserCreationForm
 # Auth
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
-
+from django.contrib.auth.models import User
 from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
@@ -274,17 +274,16 @@ class TaskDelete(DeleteView):
 
 @method_decorator(login_required, name='dispatch')
 class UserProfileView(DetailView):
-    model = UserProfile
+    model = User
     template_name = 'registration/user_profile.html'
+    context_object_name = 'user'
 
-    def get_context_data(self, *args, **kwargs):
-        users = UserProfile.objects.all() 
-        context = super(UserProfileView, self).get_context_data(*args, **kwargs)
-        # Grabe the user Page from the database and  retrieve the user profile associated with the logged-in user
-        user_pg = get_object_or_404(UserProfile, pk=self.request.user.pk)
-        context["user_profile"] = user_pg
-        return context
-
+    def get_object(self, queryset=None):
+        user = self.request.user
+        UserProfile.objects.get_or_create(user=user) # this will create UserProfile if it doesn't exist
+        return user
+        
+        
 
 #  To create a form 
 class UserProfileForm(ModelForm):
@@ -300,11 +299,17 @@ class UserProfileViewUpdate(UpdateView):
     form_class = UserProfileForm
     template_name = 'registration/user_profile_update.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['user_profile'] = self.request.user.userprofile
+        return context
+
     def get_object(self, queryset=None):
         return self.request.user.userprofile
 
     def get_success_url(self):
         return reverse('user_profile', kwargs={'pk': self.request.user.pk})
+
     
 
 @method_decorator(login_required, name='dispatch')
