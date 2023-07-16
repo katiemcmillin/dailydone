@@ -287,13 +287,11 @@ class UserProfileView(DetailView):
         return user
         
         
-
 #  To create a form 
 class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['bio', 'location', 'interests', 'picture']
-
+        fields = ['location', 'bio', 'interests', 'picture']
 
 
 @method_decorator(login_required, name='dispatch')        
