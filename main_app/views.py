@@ -336,6 +336,26 @@ class UserProfileViewUpdate(UpdateView):
             return self.render_to_response(self.get_context_data(user_form=user_form, form=form))
 
 
+
+@method_decorator(login_required, name='dispatch')  
+class UserProfileDelete(DeleteView):
+    model = User
+    template_name = 'registration/user_profile_confirm_delete.html'
+    success_url = "/"
+    
+    # get_object make sure the user that is logged in can only delete their own accounts and when it's done they are redirect to the public homepage
+    def get_object(self, queryset=None):
+        return self.request.user
+
+
+
+
+
+
+
+
+
+
 @method_decorator(login_required, name='dispatch')
 class Dashboard(View):
     template_name = 'dashboard.html'

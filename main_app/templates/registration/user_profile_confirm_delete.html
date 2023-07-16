@@ -1,0 +1,22 @@
+{% extends 'base.html' %} 
+
+{% block title %}Delete Account{% endblock %} 
+
+{% block content %}
+<div class="delete-page-container">
+    <div class="picture-delete-p">
+        <img class="image-delete-profile" src="/static/main_app/images/profile_delete_picture.jpeg"
+        alt="Goodbye - colorful Neon Sign on brickwall"/>
+    </div>
+    <h1 class="delete-page-title">Are you sure you want to delete your account?
+    </h1>
+    <p class ="delete-profile-subtitle">This action is irreversible and all your data will be lost!</p>
+    <div class="button-container-delete-profile">
+        <form method="POST">
+            {% csrf_token %}
+            <input type="submit" class="delete-profile-confirm-button"  value="Delete my account">
+        </form>
+        <a class="back-button-profile-dlt" href="{% url 'user_profile' user.pk %}">No, take me back!</a>
+    </div>
+</div>
+{% endblock %}

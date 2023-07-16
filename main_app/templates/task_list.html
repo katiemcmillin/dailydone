@@ -72,57 +72,6 @@
 </table>
 
 
-<h2 class="sub-title-tasks-pg-1">Tasks To Do ({{ tasks|length }})</h2>
-
-<table class="tasks-to-do-table">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Importance</th>
-            <th>Due Date</th>
-            <th>Admin</th>
-            <th>Contributor(s)</th>
-            <th>To Do</th>
-            <th>Action</th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for task in tasks %}
-        {% if not task.is_completed %}
-        <tr>
-            <td><a href="{% url 'task_detail' task.pk %}">{{ task.title }}</a></td>
-            <td>{{ task.importance }}</td>
-            <td>{{ task.due_date }}</td>
-            <td>{{ task.admin.username }}</td>
-            <td>
-                {% for contributor in task.contributors.all %}
-                    {{ contributor.username }}
-                    {% if not forloop.last %}, {% endif %}
-                {% endfor %}
-            </td>
-            <td class="task-todo">
-                {% if not task.is_completed %}
-                    <form method="post" action="{% url 'task_complete' task.pk %}">
-                        {% csrf_token %}
-                        <input type="checkbox" name="is_completed" value="{{ task.pk }}" onchange="this.form.submit()">
-                    </form>
-                {% endif %}
-            </td>
-            <td>
-                <a href="{% url 'task_update' task.pk %}" class="button update-button">
-                    <i class="fas fa-edit"></i> 
-                </a>
-                <a href="{% url 'task_delete' task.pk %}" class="button delete-button">
-                    <i class="fas fa-times"></i> 
-                </a>
-            </td>
-        </tr>
-        {% endif %}
-        {% endfor %}
-    </tbody>
-</table>
-
-
 <h2 class="sub-title-tasks-pg-2">Completed Tasks ({{ completed_tasks|length }})</h2>
 
 <table class="completed-tasks-table">

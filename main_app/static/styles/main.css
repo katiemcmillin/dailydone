@@ -9,8 +9,6 @@ h3 {
     color: Black;
 }
 
-
-
 p {
     font-size: 12px;
 }
@@ -178,6 +176,7 @@ body {
     background-color: #0056b3;
 }
 
+
 /* About Page */
 
 .about-page-container {
@@ -229,7 +228,7 @@ body {
     align-items: center;
     justify-content: space-between;
     overflow: hidden;
-    min-width: 800px; /* not to sqeeze the picture */
+    min-width: 800px; /* not to squeeze the picture */
 }
 
 .left-side-image {
@@ -305,8 +304,8 @@ body {
     font-size: 14px;
 }
 
-/* Projects List Page */
 
+/* Projects List Page */
 
 .title {
     color: #FA0644;
@@ -462,7 +461,6 @@ body {
     box-shadow: 0px 0px 4px #FA5300;
 }
 
-
 .form-container input[type="submit"] {
     background-color: #FA5300;
     color: #FFFFFF;
@@ -499,6 +497,7 @@ body {
     font-style: italic;
     margin-top: 0.5rem;
 }
+
 
 /* Project Detail Page */
 
@@ -634,6 +633,7 @@ body {
     font-weight: bold;
 }
 
+
 /* Detail Page - Forr Small Screen */
 @media (max-width: 768px) {
 .project-detail {
@@ -671,8 +671,8 @@ body {
 }
 }
 
-/* Project Update Page */
 
+/* Project Update Page */
 
 .update-page-container {
     margin: 20px;
@@ -796,6 +796,7 @@ body {
 }
 }
 
+
 /* Tasks List Page */
 
 .task-table {
@@ -853,24 +854,6 @@ body {
     color: #FFFFFF;
 } 
 
-
-.tasks-to-do-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-.tasks-to-do-table th,
-.tasks-to-do-table td {
-    padding: 8px;
-    text-align: left;
-    border-bottom: 1px solid #ddd;
-}
-
-.tasks-to-do-table th {
-    background-color: #063854;
-    color: #FFFFFF;
-} 
-
 .title_tasks-l {
     color: Black;
     font-size: 32px;
@@ -895,7 +878,7 @@ body {
     margin-top: 2rem;
 }
 
-.sub-title-tasks-pg-1, .sub-title-tasks-pg-2 {
+.sub-title-tasks-pg-2 {
     padding: 0.5em 0;
 }
 
@@ -906,7 +889,6 @@ body {
 .create-task-button:hover {
     background-color: #FA0644 !important;
 }
-
 
 .project-list-link-taskpg {
     background-color: #f5f5f5;
@@ -1047,8 +1029,8 @@ body {
     align-items: center;
 }
 
-/* Task Detail PAge */
 
+/* Task Detail PAge */
 
 #task-detail {
     max-width: 600px;
@@ -1115,6 +1097,7 @@ body {
 #navigation-links a:hover {
     color: #333;
 }
+
 
 /* Task Update Page */
 
@@ -1189,8 +1172,8 @@ body {
     color: #0050B5;
 }
 
-/* Login Page */
 
+/* Login Page */
 
 h1.login-title {
     text-align: center;
@@ -1250,6 +1233,7 @@ p.has-text-centered a.signup-link {
 p.has-text-centered a.signup-link:hover {
     text-decoration: underline;
 }
+
 
 /* signup Page*/
 /* Same login a little */
@@ -1330,6 +1314,7 @@ p.has-text-centered a.login-link:hover {
     text-decoration: underline;
 }
 
+
 /* User Profile Page */
 
 .container-user-profile {
@@ -1388,8 +1373,37 @@ Change background color on mouse-over
     transform: translateY(4px);
 }
 
-/* User Update Profile Page */
+.delete-button-profile {
+    margin-top: 20px;
+    background-color: #BF2026; 
+    border: none; 
+    color: #fff;
+    padding: 10px 20px; 
+    text-align: center; 
+    text-decoration: none; 
+    display: inline-block;
+    font-size: 16px; 
+    transition-duration: 0.4s; 
+    cursor: pointer; 
+    letter-spacing: 2px;
+    border-radius: 5px;
+}
 
+Change background color on mouse-over 
+.delete-button-profile:hover {
+    background-color: #444; 
+    color: #fff; 
+}
+
+/* Add a darker grey background color when active  */
+.delete-button-profile:active {
+    background-color: #222;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+
+/* User Update Profile Page */
 
 .title-update-profile{
     font-size: 32px;
@@ -1523,7 +1537,6 @@ Change background color on mouse-over
     transform: translateY(4px);
 }
 
-
 .completed-pjct-list {
     list-style: none;
     padding: 0;
@@ -1542,6 +1555,87 @@ Change background color on mouse-over
 
 .completed-pjct-details {
     color: #868e96;
+}
+
+
+/* Delete Profile Page */
+
+.image-delete-profile {
+    width: 100%;
+    height: 70vh; 
+    object-fit: cover;
+    object-position: center;
+    display: block; 
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.delete-profile-subtitle {
+    text-align: center;
+    color: red;
+    font-size: 30px;
+    font-weight: bold;
+    margin-top: -1rem;
+}
+
+.delete-profile-confirm-button {
+    background-color: #BF2026;
+    border: none;
+    color: #fff;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    letter-spacing: 2px;
+    border-radius: 5px;
+    margin-right: 10px; 
+}
+
+.delete-profile-confirm-button:hover {
+    background-color: #FA5300;
+    color: #fff;
+}
+
+.delete-profile-confirm-button:active {
+    background-color: #222;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.back-button-profile-dlt {
+    background-color: #000;
+    border: none;
+    color: #fff;
+    padding: 8px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    letter-spacing: 2px;
+    border-radius: 5px;
+}
+
+.back-button-profile-dlt:hover {
+    background-color: #444;
+    color: #fff;
+}
+
+.back-button-profile-dlt:active {
+    background-color: #222;
+    box-shadow: 0 5px #666;
+    transform: translateY(4px);
+}
+
+.button-container-delete-profile {
+    display: flex;
+    justify-content: center;
+    gap: 10px; 
+    margin-top: 2rem;
 }
 
 /* Dashboard Page */
@@ -1578,7 +1672,6 @@ Change background color on mouse-over
     padding: 1em;
     position: relative;
     border-radius: 10px;
-
 }
 
 .project-dashb-container {
@@ -1622,7 +1715,6 @@ Change background color on mouse-over
     display: flex;
     justify-content: space-between;
     margin-bottom: 0.5rem;
-    
 }
 
 .profile-dashb-container a {
@@ -1631,7 +1723,6 @@ Change background color on mouse-over
     right: 30px; /* move arrow */
     color: black;
     transform: scale(1.5);
-    
 }
 
 .project-dashb-container svg {

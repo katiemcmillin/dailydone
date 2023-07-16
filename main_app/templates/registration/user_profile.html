@@ -54,5 +54,7 @@
         <span class="value">{{ user.date_joined }}</span>
     </div>
         <a class="navbar-item button_user_profile" href="{% url 'user_profile_update' pk=user.userprofile.pk %}">Update Profile</a>
+
+        <a href="{% url 'user_profile_delete' user.pk %}" class="delete-button-profile">Delete My Account</a>
 </div>
 {% endblock %}
