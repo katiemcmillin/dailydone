@@ -1,5 +1,8 @@
 from django.contrib.auth import login
-from django.contrib.auth.forms import UserCreationForm
+# from django.contrib.auth.forms import UserCreationForm
+from .forms import UserRegistrationForm, UserForm #import the form for registration as i don't use UserCreationForm form any more as i added more fields to the signup form 
+
+
 # Auth
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
@@ -8,13 +11,14 @@ from django.urls import reverse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views import View
 from .models import Project, Task, TaskComplete, UserProfile
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView
 from django.db.models import Q
 from datetime import date, datetime
 from django.forms import ModelForm
+
 
 
 
@@ -28,12 +32,12 @@ class PrivateHome(TemplateView):
 class Signup(View):
     # show a form to fill out
     def get(self, request):
-        form = UserCreationForm()
+        form = UserRegistrationForm() #I updated this line not UserCreationForm anymore so I remove the import
         context = {"form": form}
         return render(request, "registration/signup.html", context)
     # on form submit, validate the form and login the user.
     def post(self, request):
-        form = UserCreationForm(request.POST)
+        form = UserRegistrationForm(request.POST)
         if form.is_valid():
             user = form.save()
             login(request, user)
@@ -246,7 +250,6 @@ class TaskCreateWithProject(CreateView):
         return reverse('project_detail', kwargs={'pk': self.object.project.pk}) 
 
 
-
 @method_decorator(login_required, name='dispatch')       
 class TaskUpdate(UpdateView):
     model = Task
@@ -292,25 +295,48 @@ class UserProfileForm(ModelForm):
         fields = ['bio', 'location', 'interests', 'picture']
 
 
-# Use the form here 
+
 @method_decorator(login_required, name='dispatch')        
 class UserProfileViewUpdate(UpdateView):
     model = UserProfile
     form_class = UserProfileForm
+    user_form_class = UserForm  # additionnal form used to add New fiels : first_name, last_name, email, see forms.py file 
     template_name = 'registration/user_profile_update.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['user_profile'] = self.request.user.userprofile
+        context['user_profile'] = self.request.user.userprofile #use user profileb page content
+        # If user_form is not already in the context, add it
+        if 'user_form' not in context:
+            context['user_form'] = self.user_form_class(instance=self.request.user)
+        # If form (UserProfile form) is not already in the context, add it    
+        if 'form' not in context:
+            context['form'] = self.form_class(instance=self.request.user.userprofile)
         return context
 
+    #We return The user profile of the user that is currently logged in
     def get_object(self, queryset=None):
         return self.request.user.userprofile
 
+    # Redirect to the User profile page
     def get_success_url(self):
         return reverse('user_profile', kwargs={'pk': self.request.user.pk})
 
-    
+    def post(self, request, *args, **kwargs):
+        self.object = self.get_object()
+        # Create the UserProfile form with data from the POST request and the current UserProfile instance and after also create the User form with data from the POST request and the current User instance
+        user_form = self.user_form_class(request.POST, instance=request.user)
+        form = self.form_class(request.POST, request.FILES, instance=self.object)
+        if user_form.is_valid() and form.is_valid():
+            # Save the data from both forms
+            user_form.save()
+            form.save()
+            # Redirect to the success URL
+            return HttpResponseRedirect(self.get_success_url())
+        else:
+            #If either form is not valid, re-render the template with the current context (including the invalid forms)
+            return self.render_to_response(self.get_context_data(user_form=user_form, form=form))
+
 
 @method_decorator(login_required, name='dispatch')
 class Dashboard(View):

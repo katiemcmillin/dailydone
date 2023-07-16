@@ -8,7 +8,10 @@
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         <div class="form-group-update-profile">
-            {{ form.as_p }}
+            <!-- Displays first_name, last_name, and email -->
+            {{ user_form.as_p }}
+            <!-- Displays the remaining user profile fields -->
+            {{ form.as_p }} 
         </div>
         <button type="submit" class="button_save_update_profile">Save</button> 
     </form>

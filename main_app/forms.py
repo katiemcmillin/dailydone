@@ -21,3 +21,9 @@ class UserRegistrationForm(UserCreationForm):
         if commit:
             user.save()
         return user
+    
+# To add new fields to the User Profile Update Form
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['first_name', 'last_name', 'email']
