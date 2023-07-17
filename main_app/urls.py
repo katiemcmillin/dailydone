@@ -1,6 +1,6 @@
 from django.urls import path
 from . import views
-from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('', views.PublicHome.as_view(), name="public_home"),
@@ -26,8 +26,6 @@ urlpatterns = [
     path('tasks/<int:pk>/complete', views.TaskCompleteView.as_view(), name='task_complete'),
     # User
     path('accounts/signup/', views.Signup.as_view(), name="signup"),
-    path('accounts/login/', auth_views.LoginView.as_view(), name='login'),
-    path('accounts/logout/', auth_views.LogoutView.as_view(), name='logout'),   
     path('profile/<int:pk>/', views.UserProfileView.as_view(), name='user_profile'),
     path('profile/<int:pk>/update', views.UserProfileViewUpdate.as_view(), name='user_profile_update'),
     path('profile/<int:pk>/delete', views.UserProfileDelete.as_view(), name='user_profile_delete'),
