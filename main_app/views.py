@@ -55,7 +55,7 @@ class About(TemplateView):
 @method_decorator(login_required, name='dispatch')
 class ProjectCreate(CreateView):
     model = Project
-    fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status', 'admin', 'contributors']
+    fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status', 'contributors']
     template_name = "project_create.html"
 
     def form_valid(self, form):
@@ -114,7 +114,7 @@ class ProjectDetail(DetailView):
 @method_decorator(login_required, name='dispatch')
 class ProjectUpdate(UpdateView):
     model = Project
-    fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status', 'admin', 'contributors', 'is_completed']
+    fields = ['title', 'description', 'start_date', 'due_date', 'importance', 'status', 'contributors', 'is_completed']
     template_name = "project_update.html"
 
     def get_success_url(self):
@@ -230,7 +230,7 @@ class TaskCreateWithProjects(CreateView):
 # access to all the projects to pick in the list
     def get_context_data(self, **kwargs):
         context = super().get_context_data( **kwargs)
-        context['projects'] = Project.objects.all()
+        context['projects'] = Project.objects.filter(admin=self.request.user)
         return context
     
     def form_valid(self, form):
