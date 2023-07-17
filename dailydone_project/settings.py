@@ -155,29 +155,33 @@ USE_TZ = True
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+# Local settings #
 # STATIC_URL = '/static/'
 # STATICFILES_DIRS = [os.path.join(BASE_DIR,'main_app/static')]
 
-
+# Source: For whitenoise using Django 4.2+ https://whitenoise.readthedocs.io/en/stable/django.html#add-compression-and-caching-support
 
 STATIC_URL = '/static/'
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
     STORAGES = {
         "staticfiles": {
-            "BACKEND": "django.contrib.staticfiles.storage.ManifestStaticFilesStorage",
+            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
         },
     }
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'main_app/static/')]
 
-# MEDIA_URL = '/media/'
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 # Add this variable to specify where successful logins should redirect to
 LOGIN_REDIRECT_URL = 'private_home'
 
 LOGOUT_REDIRECT_URL = 'public_home'
+
+
+# For picture on the profile page and profile form page
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 
