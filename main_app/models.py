@@ -105,7 +105,7 @@ class UserProfile(models.Model):
     bio = models.TextField(max_length=4000, blank=True)
     location = models.CharField(max_length=2000, blank=True)
     interests = models.TextField(max_length=4000, blank=True)
-    picture = models.ImageField(upload_to='media', blank=True)
+    # picture = models.ImageField(upload_to='media', blank=True)
     
     def __str__(self):
         return self.user.username

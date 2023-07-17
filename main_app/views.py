@@ -291,7 +291,7 @@ class UserProfileView(DetailView):
 class UserProfileForm(ModelForm):
     class Meta:
         model = UserProfile
-        fields = ['location', 'bio', 'interests', 'picture']
+        fields = ['location', 'bio', 'interests'] #field picture remove as not suported with Render without platform such as AWS
 
 
 @method_decorator(login_required, name='dispatch')        
@@ -346,14 +346,6 @@ class UserProfileDelete(DeleteView):
     # get_object make sure the user that is logged in can only delete their own accounts and when it's done they are redirect to the public homepage
     def get_object(self, queryset=None):
         return self.request.user
-
-
-
-
-
-
-
-
 
 
 @method_decorator(login_required, name='dispatch')

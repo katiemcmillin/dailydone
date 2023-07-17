@@ -17,3 +17,4 @@ typing_extensions==4.7.0
 virtualenv==20.23.0
 virtualenv-clone==0.5.7
 whitenoise==6.5.0
+django-cors-headers==3.10.0

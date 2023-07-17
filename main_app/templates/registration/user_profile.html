@@ -8,11 +8,11 @@
 <h2 class="title-update-profile">User Profile</h2>
 
 <div class="container-user-profile">
-    <div class="profile-picture">
+    {% comment %} <div class="profile-picture">
         {% if user.userprofile.picture %}
         <img src="{{ user.userprofile.picture.url }}" alt="Profile Picture">
         {% endif %}
-    </div>
+    </div> {% endcomment %}
     <div class="profile-info">
         <span class="label_user_profile">Username</span>
         <br>
