@@ -31,6 +31,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
+# DEBUG_PROPAGATE_EXCEPTIONS = True
 
 DEBUG = 'RENDER' not in os.environ
 
@@ -153,6 +154,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# STATIC_URL = '/static/'
+# STATICFILES_DIRS = [os.path.join(BASE_DIR,'main_app/static')]
+
 
 STATIC_URL = '/static/'
 if not DEBUG:

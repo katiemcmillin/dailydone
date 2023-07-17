@@ -127,6 +127,13 @@ class ProjectDelete(DeleteView):
     template_name = "project_delete_confirmation.html"
     success_url = "/projects/"
 
+    # make sure the person that can delete the project is teh one who creates it before the project is deleted. so we see they hav ethe right to do so. When i'ts delete, redirection on the project list page
+    def get_queryset(self):
+        return self.request.user.projects.all()
+    
+    def get_success_url(self):
+        return reverse('project_list')
+
 # handle the action of marking a project as completed
 @method_decorator(login_required, name='dispatch')
 class ProjectComplete(View):
