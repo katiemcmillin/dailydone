@@ -30,10 +30,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 # DEBUG_PROPAGATE_EXCEPTIONS = True
 
-DEBUG = 'RENDER' not in os.environ
+# DEBUG = 'RENDER' not in os.environ
 
 ALLOWED_HOSTS = []
 
@@ -95,24 +95,24 @@ WSGI_APPLICATION = 'dailydone_project.wsgi.application'
 
 # To use Neon with Django, you have to create a Project on Neon and specify the project connection settings in your settings.py in the same way as for standalone Postgres.
 
-# DATABASES = {
-#   'default': {
-#     'ENGINE': 'django.db.backends.postgresql',
-#     'NAME': 'Dailydone',
-#     'USER': os.environ['DB_USER'],
-#     'PASSWORD': os.environ['DB_PW'],
-#     'HOST': os.environ['DB_HOST'],
-#     'PORT': '5432',
-#   }
-# }
-
 DATABASES = {
-    'default': dj_database_url.config(
-        # Feel free to alter this value to suit your needs.
-        conn_max_age=600,
-        conn_health_checks=True
-    )
+  'default': {
+    'ENGINE': 'django.db.backends.postgresql',
+    'NAME': 'Dailydone',
+    'USER': os.environ['DB_USER'],
+    'PASSWORD': os.environ['DB_PW'],
+    'HOST': os.environ['DB_HOST'],
+    'PORT': '5432',
+  }
 }
+
+# DATABASES = {
+#     'default': dj_database_url.config(
+#         # Feel free to alter this value to suit your needs.
+#         conn_max_age=600,
+#         conn_health_checks=True
+#     )
+# }
 
 
 # Password validation
@@ -179,7 +179,7 @@ LOGIN_REDIRECT_URL = 'private_home'
 LOGOUT_REDIRECT_URL = 'public_home'
 
 
-# For picture on the profile page and profile form page
+# For picture on the profile page and profile form page but need to create a media directory near manage.py and add inside main_app.py file and inside the images
 # MEDIA_URL = '/media/'
 # MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
