@@ -164,19 +164,19 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 STATIC_URL = '/static/'
 if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    # STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    STORAGES = {
-        "staticfiles": {
-            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-        },
-    }
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+    # STORAGES = {
+    #     "staticfiles": {
+    #         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    #     },
+    # }
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR,'main_app/static/')]
 
 # Add this variable to specify where successful logins should redirect to
-LOGIN_REDIRECT_URL = 'private_home'
+LOGIN_REDIRECT_URL = 'private_home/'
 
-LOGOUT_REDIRECT_URL = 'public_home'
+LOGOUT_REDIRECT_URL = 'public_home/'
 
 
 # For picture on the profile page and profile form page but need to create a media directory near manage.py and add inside main_app.py file and inside the images
