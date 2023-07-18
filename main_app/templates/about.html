@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}About{% endblock %}
 
 {% block content %}
@@ -18,7 +18,7 @@
       <h2 class="section-title">Key Features:</h2>
       <div class="features-list">
           <div class="feature-item">
-              <img class="feature-image" src="/static/main_app/images/user_authentification_img.jpeg" alt="User Authentication picture">
+              <img class="feature-image" src="{% static 'images/user_authentification_img.jpeg' %}" alt="User Authentication picture">
               <div class="feature-content">
                   <h3 class="feature-title">User Authentication</h3>
                   <p class="feature-description">Register, Login, Logout, Create and Edit User Profile</p>
@@ -26,7 +26,7 @@
           </div>
 
           <div class="feature-item">
-            <img class="feature-image" src="/static/main_app/images/Project_Management_img.jpeg" alt="Project Management Icon">
+            <img class="feature-image" src="/static/images/Project_Management_img.jpeg" alt="Project Management Icon">
             <div class="feature-content">
               <h3 class="feature-title">Project Management</h3>
               <p class="feature-description">Create, View, Edit, and Delete projects, Set Project's Characteristics, Monitor Project's Status, Assign Admin and Contributors to projects, Mark them as as completed</p>
@@ -34,7 +34,7 @@
           </div>
 
           <div class="feature-item">
-              <img class="feature-image" src="/static/main_app/images/Task_Management_img.jpeg" alt="Task Management Icon">
+              <img class="feature-image" src="/static/images/Task_Management_img.jpeg" alt="Task Management Icon">
               <div class="feature-content">
                   <h3 class="feature-title">Task Management</h3>
                   <p class="feature-description">Add, View, Update, and Delete tasks, Set Task's Characteristics within projects, , Monitor Task's Status, Assign Admin and Contributors to tasks, Mark them as as completed</p>
@@ -42,7 +42,7 @@
           </div>
 
           <div class="feature-item">
-              <img class="feature-image" src="/static/main_app/images/Collaboration_img.jpeg" alt="Collaboration Icon">
+              <img class="feature-image" src="/static/images/Collaboration_img.jpeg" alt="Collaboration Icon">
               <div class="feature-content">
                   <h3 class="feature-title">Collaboration</h3>
                   <p class="feature-description">Assign tasks to specific unique or multiple contributor(s) and invite them to join projects and tasks, display list of Contributors and Admin per project and task</p>
@@ -50,7 +50,7 @@
           </div>
 
           <div class="feature-item">
-              <img class="feature-image" src="/static/main_app/images/user_profile_img.jpeg" alt="User Profile Icon">
+              <img class="feature-image" src="/static/images/user_profile_img.jpeg" alt="User Profile Icon">
               <div class="feature-content">
                   <h3 class="feature-title">User Profile</h3>
                   <p class="feature-description">With our user profiles, each individual can tailor their experience to fit their needs, enhancing productivity and providing a personalized touch to project management</p>
@@ -68,7 +68,7 @@
       <div class="image-wrapper"> 
           <img
               class="image is-128x128 developer-image"
-              src="/static/main_app/images/pict_Dolores_Crazover.png"
+              src="/static/images/pict_Dolores_Crazover.png"
               alt="Dolores Crazover"
           />
       </div>

@@ -1,11 +1,11 @@
 {% extends 'base.html' %} 
-
+{% load static %}
 {% block title %}Delete Project{% endblock %} 
 
 {% block content %}
 <div class="delete-page-container">
     <div class="picture-delete-p">
-        <img class="image-delete-p" src="/static/main_app/images/image_delete_pcroject_page.jpeg"
+        <img class="image-delete-p" src="{% static 'images/image_delete_pcroject_page.jpeg' %}"
         alt="Abstract circle liquid motion flow explosion. Curved wave colorful pattern with paint drops on black background"/>
     </div>
     <h1 class="delete-page-title">

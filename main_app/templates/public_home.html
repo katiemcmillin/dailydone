@@ -1,5 +1,5 @@
 {% extends 'base.html' %}
-
+{% load static %}
 {% block title %}DailyDone Public Home{% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
         </div>
     </div>
     <div class="right-side-image container-image-homep-pub">
-        <img class="image-homepage-public" src="/static/main_app/images/lightball_homepage2.png" alt="colorfull lightball"/>
+        <img class="image-homepage-public" src="{% static 'images/lightball_homepage2.png' %}" alt="colorfull lightball"/>
     </div>
 </div>
 {% endblock %}
