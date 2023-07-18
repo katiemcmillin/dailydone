@@ -160,16 +160,18 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # Source: For whitenoise using Django 4.2+ https://whitenoise.readthedocs.io/en/stable/django.html#add-compression-and-caching-support
 
 STATIC_URL = '/static/'
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-    # STORAGES = {
-    #     "staticfiles": {
-    #         "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-    #     },
-    # }
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR,'main_app/static/')]
+# Following settings only make sense on production and may break development environments.
+if not DEBUG:
+    # Tell Django to copy statics to the `staticfiles` directory
+    # in your application directory on Render.
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+    # Turn on WhiteNoise storage backend that takes care of compressing static files
+    # and creating unique names for each version so they can safely be cached forever.
+    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main_app/static/')]
 
 # Add this variable to specify where successful logins should redirect to
 LOGIN_REDIRECT_URL = 'private_home/'
