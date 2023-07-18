@@ -33,7 +33,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', default='your secret key')
 # DEBUG = True
 # DEBUG_PROPAGATE_EXCEPTIONS = True
 
-DEBUG = 'RENDER' not in os.environ
+DEBUG = os.environ['DEBUG']
 
 ALLOWED_HOSTS = []
 
