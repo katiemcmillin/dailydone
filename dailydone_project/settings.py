@@ -171,7 +171,7 @@ if not DEBUG:
     # and creating unique names for each version so they can safely be cached forever.
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main_app/static/')]
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'main_app/static/')]
 
 # Add this variable to specify where successful logins should redirect to
 LOGIN_REDIRECT_URL = 'private_home'
